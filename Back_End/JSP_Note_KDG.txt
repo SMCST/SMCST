@@ -1,0 +1,376 @@
+JSP 노트
+
+==웹 어플리케이션의 기초==
+웹 어플리케이션의 구성 요소
+웹브라우저->웹서버->어플리케이션 서버->데이터베이스
+
+CGI 방식
+CGI 방식의 요청 처리
+요청->웹서버->직접 실행(펄 프로그램, C프로그램)
+-CGI 방식은 대량 트래픽 발생시 처리량에서 불리
+
+어플리케이션 서버 방식
+어플리케이션 서버 방식의 요청 처리
+요청->웹서버->어플리케이션 서버->프로그램1, 2, 3
+-메모리 사용량 및 프로세스 관리 부하 감소로 전체적인 처리량 높음
+
+-실행 코드 방식의 실행 흐름
+웹 브라우저 요청 전송->웹서버 요청 받음->프로그램 실행
+-스크립트 방식의 실행 흐름
+웹 브라우저 요청 전송->웹서버 요청 받음->스크립트코드번역->번역된코드실행
+
+URL(Uniform Resource Locator)
+구성 : [프로토콜]://[호스트][:포트][경로][파일명][.확장자][쿼리문자열]
+예:http://www.google.com/search?hl=en&q=jsp&ap=f&oq=1
+프로토콜:http
+호스트:www.google.com
+포트: 80(http 프로토콜의 기본 포트)
+경로: /search
+쿼리문자열: hl=en&q=jsp&aq=f&oq=1
+(URL은 웹 어플리케이션에 요청을 구분하기 위한 용도로 사용됨)
+
+서블릿과 JSP
+-자바를 만든 Sun에서 정한 웹 개발 표준
+(서블릿Servlet : 실행 코드 방식의 특징)
+(JSPJava Server Pages : 스크립트 코드 방식의 특징)
+
+JSP의 특징
+-자바 기반 스크립트 언어(자바의 기능을 그대로 사용 가능)
+-HTTP에 대한 클라이언트의 요청 처리/응답
+-웹 어플리케이션에서 결과 화면을 생성할 때 주로 사용
+
+웹컨테이너
+-웹 어플리케이션을 실행할 수 있는 컨테이너
+-JSP와 서블릿을 실행해 줌
+웹콘테이너 (안에 JSP, Servlet 있음)
+-주요 웹 컨테이너(톰캣Tomcat, 제티Jetty)
+
+JSP를 사용하는 이유
+-자바 언어에 기반하기 때문에 플랫폼에 독립적
+(리눅스, 윈도우 등 운영체제에 상관없이 동작)
+-자바 언어에 대한 깊은 이해 없이도 초기 학습 가능
+(스크립트 언어는 상대적으로 자바 언어보다 단순)
+-스프링(Spring)이나 스트러츠(Struts)와 같은 프레임워크와 완벽하게 연동
+============================================
+==웹 프로그래밍 시작하기==
+개발환경
+-필요 프로그램
+(JDK, 웹 컨테이너-톰캣 6, 제티 6과 같은 컨테이너, 코드 편집기)
+-JDK 설치 후 환경 변수
+(JAVA_HOME 환경 변수 설정, CATALINA_HOME 톰캣 설치 디렉터리)
+
+웹 어플리케이션 개발 퀵 스타트
+1단계, 웹 어플리케이션 디렉터리 생성
+웹 어플리케이션 디렉터리 생성
+-[웹컨테이너]\webapps 디렉터리에 웹 어플리케이션 디렉터리 생성
+-웹 어플리케이션 디렉터리는 URL의 경로와 관련
+예 - [톰캣]\webapps\ 디렉터리에 chap02 디렉터리 생성
+   - 이 디렉터리는 http://localhost:8080/chap02와 매칭
+2단계, 간단한 JSP 작성하기
+<%@ page contentType="text/html;charset=euc-kr" %>
+<%@ page import="java.util.Date" %> <!-- 디렉티브 -->
+<%
+	Date now = new Date(); //스크립트릿
+%>
+<html>
+<head>
+	<title>현재 시간</title>
+</head>
+<body>
+현재 시각:
+<%= now%> <!--표현식 -->
+</body>
+</html>
+3단계, 실행
+[톰캣]\bin\Tomcat8w.exe 실행하여 톰캣서비스 실행.
+http://localhost:8080 접속하였을 때 apache tomcat 사이트 나오는지 확인.
+http://localhost:8080/chap02/now.jsp
+[톰캣]\webapps\chap02\now.jsp가 실행됨
+
+JSP 코드의 일반적 구성
+<%@ page contentType="text/html;charset=utf-8" %>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>HTML 문서의 제목</title>
+</head>
+<body>
+<%
+	String bookTitle = "JSP 프로그래밍";
+	String author = "최범균";
+%>
+<b><%= bookTitle %></b>(<%= author %>)입니다.
+</body>
+</html>
+
+JSP 페이지의 구성 요소
+-디렉티브(directive)
+-스크립트: 스크립트릿(Scriptlet), 표현식(Expression), 선언부(Declaration)
+-표현언어(Expression Language)
+-기본객체(Implicity Object)
+-정적인 데이터
+-표준 액션 태그(Action Tag)
+-커스텀 태그(Custom Tag)와 표준 태그 라이브러리(JSTL)
+
+디렉티브(Directive)
+-JSP 페이지에 대한 설정 정보를 지정
+-디렉티브 구문
+  - <%@ 디렉티브이름 속성1="값1" 속성2="값2" ... %>
+  - 예, <%@ page contentType = "text/html; charset=utf-8" %>
+-제공 디렉티브
+  - page : JSP 페이지에 대한 정보를 지정
+     - 문서의 타입, 출력 버퍼의 크기, 에러 페이지 등 정보 지정
+  - taglib : 사용할 태그 라이브러리를 지정
+  - include : 다른 문서를 포함
+
+스크립트 요소
+-동적으로 출력 결과를 생성하기 위해 사용
+-스크립트 요소
+   - 표현식(Expression) - 값을 출력
+   - 스크립트릿(Scriptlet) - 자바 코드를 실행
+   - 선언부(Declaration) - 자바 메서드(함수)를 정의
+
+기본객체(implicit object)
+-웹 프로그래밍에 필요한 기능을 제공
+-JSP에서 별도 선언 없이 사용 ㄱ나ㅡㅇ
+-주요 기본 객체
+  - request : 요청 정보를 구할 때 사용
+  - response : 응답과 관련된 설정(헤더, 쿠키 등) 시 사용
+  - out : 직접 응답을 출력할 때 사용
+  - session : 세션 관리에 사용
+
+page 디렉티브
+-JSP 페이지에 대한 정보를 입력
+  - JSP가 생성할 문서의 타입, 사용할 클래스, 버퍼 여부, 세션 여부
+-JSP 디렉티브의 작성 예
+  -  <%@ page contentType="text/html;charset=utf-8" %>
+  -  <%@ page import="java.util.Date" %>
+-주요 속성
+  - contentType ; JSP가 생성할 문서의 타입을 지정
+  - import : JSP 페이지에서 사용할 자바 클래스를 지정
+  - session : JSP 페이지가 세션을 사용할 지의 여부를 지정
+  - info : JSP 페이지에 대한 설명을 입력한다.
+  - errorPage : 에러가 발생할 때 보여줄 페이지를 지정
+  - isErrorPage : 에러 페이지인지의 여부를 지정
+
+page 디렉티브 : contentType 속성과 캐릭터 셋
+-JSP 페이지가 생성할 문서의 타입을 지정
+-contentType 속성 형식
+ TYPE
+ TYPE; charset=캐릭터 셋
+-TYPE: 생성할 문서의 MIME 타입
+  - text/html, text/xml, text/plain 등
+-캐릭터 셋 - 응답 문서의 문자 인코딩 지정
+  - EUC-KR, UTF-8, ISO-8859-1 등
+-설정 예 : <%@ page contentType="text/html; charset=utf-8" %>
+
+page 디렉티브 : import 속성
+-JSP 페이지에서 사용할 클래스(인터페이스) 지정
+-import 속성의 사용 예
+<%@ page import = "java.util.Calendar" %>
+<%@ page import = "java.util.Calendar, java.util.Date" %>
+<%@ page import = "java.util.*" %>
+-import 한 클래스는 단순 클래스 이름으로 사용 가능
+<%@ page contentType = "text/html; charset=utf-8" %>
+<%@ page import = "java.util.Date" %>
+<html>
+<head><title>Calendar 클래스 사용</title></head>
+<body>
+<%
+	Date date = new Date();
+ 	java.util.Calendar cal = java.util.Calendar.getInstance();
+%>
+</body>
+</html>
+
+스크립트 요소
+-요청을 처리하는 데 필요한 코드를 실행
+-동적으로 응답 결과를 생성하기 위해 사용
+-스크립트 요소 세 가지
+(스크립트릿Scriptlet, 표현식Expression, 선언부Declaration)
+
+스크립트릿(Scriptlet)
+-자바 코드를 실행할 때 사용되는 코드의 브록
+-스크립트릿의 구조
+<% 
+	자바코드1;
+	자바코드2;
+%>
+-예제 코드
+<%@ page contentType = "text/html;charset=utf-8" %>
+<%
+	int sum = 0;
+	for(int i=1; i<=10; i++){
+		sum = sum+i;
+	}
+%>
+1 부터 10까지의 합은 <%= sum %> 입니다.
+
+표현식(Expression)
+-값을 출력 결과에 포함시키고자 할 때 사용
+-표현식 구문
+  - <%= 값 %>
+-표현식 예
+<%= 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 %>
+<%
+	int sum = 0;
+	for (int i=1; i<= 10; i++){
+		sum = sum + i;
+	}
+%>
+1부터 10까지의 합은 <%= sum %> 입니다.
+
+선언부(Declaration)
+-스크립트릿이나 표현식에서 사용할 수 있는 함수를 작성할 때 사용
+-선언부 형식
+<%!
+	public 리턴타입 메서드이름(파라미터목록){
+  		자바코드1;
+		자바코드2;
+		...
+		자바코드n;
+		return 값;
+	}
+%>
+
+선언부와 파라미터 값 전달
+<%@ page contentType = "text/html; charset=utf-8" %>
+<%! 
+	public int multiplay(int a, int b){
+		int c = a*b;
+		return c;
+	}
+%>
+<html>
+<head><title>선언부를 사용한 두 정수값의 곱</title></head>
+<body>
+10 * 25 = <%= multiplay(10, 25) %>
+
+request 기본 객체
+-웹 브라우저가 웹 서버에 전송한 요청 관련 정보 제공
+-주요 기능
+ -클라이언트(웹 브라우저)와 관련된 정보 읽기 기능
+ - 서버와 관련된 정보 읽기 기능
+ - 클라이언트가 전송한 요청 파라미터 읽기 기능
+ - 클라이언트가 전송한 요청 헤더 읽기 기능
+ - 클라이언트가 전송한 쿠기 읽기 기능
+ - 속성 처리 기능
+
+request 기본 객체 - 주요 정보 제공 메서드
+getRemoteAddr()	String
+웹 서버에 연결한 클라이언트의 IP 주소를 구한다. 계시판이나 방명록 등에서 글 작성자의 IP 주소가 자동으로 입력되기도 하는데, 이때 입력한 IP주소가 바로 이 메서드를 사용하여 구한 것이다.
+getMethod()	String
+웹 브라우저가 정보를 전송할 때 사용한 방식을 구한다.
+getRequestURI()	String
+웹 브라우저가 요청한 URL에서 경로를 구한다.
+getContextPath()	String
+JSP 페이지가 속한 웹 어플리케이션의 컨텍스트 경로를 구한다.
+getServerName()	String
+연결할 때 사용한 서버 이름을 구한다.
+getServerPort()	int
+서버가 실행중인 포트 번호를 구한다.
+http://localhost:8080/chap03/requetsInfo.jsp
+request.getServerName() : localhost
+request.getServerPort() : 8080
+request.getRequestURI() : chap03/requestInfo.jsp
+
+요청 파라미터
+웹페이지에 폼 데이터 -> 파라미터 목록 -> 웹서버
+
+request 기본 객체 - 파라미터 읽기 메서드
+getParameter(String name)	String
+이름이 name인 파라미터의 값을 구한다. 존재하지 않을 경우 null을 리턴한다.
+getParameterValues(String name)	String[]
+이름이 name인 모든 파라미터의 값을 배열로 구한다. 존재하지 않을 경우 null을 리턴한다.
+getParameterNames()	java.util.Enumeration
+웹브라우저가 전송한 파라미터의 이름을 구한다.
+getParameterMap()		java.util.Map
+웹 브라우저가 전송한 파라미터의 맵을 구한다. 맵은 <파라미터 이름, 값> 쌍으로 구성된다.
+
+GET 방식(METHOD)/POST 방식(METHOD)
+-파라미터를 전송하는 방식
+  - GET : 쿼리문자열로 전송
+  - POST : 요청 몸체 데이터로 전송
+- GET 방식 전송 예
+GET /chap03/viewParameter.jsp?name=cbk&address=seoul HTTP/1.1
+Host: localhost:8080
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.0; ...
+Accept: text/html, application/xhtml+xml.application/xml; q=0.9,*/*; q=0.8
+Accept-Language: ko-kr,ko;q=0.8,en-us;q=0.5,en;q=0.3
+...
+-POST 방식 전송 예
+POST /chap03/viewParameter.jsp HTTP/1.1
+Host: localhost:8080
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.0; ko; rv:1.9.0.3) ...
+...
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 22
+
+name=cbk&address=seoul
+
+파라미터 값의 인코딩/디코딩
+-파라미터 값의 인코딩/디코딩
+웹 브라우저
+파라미터 값 인코딩 : 최범균 -> %EC%B5%9C%EB%B2%94%EA%B7%A0
+인코딩 된 값을 파라미터로 전송: name=%EC%B5%9C%EB%B2%94%EA%B7%A0
+웹서버(WAS) 파라미터 값 디코딩 %EC%B5%9C%EB%B2%94%EA%B7%A0 -> 최범균
+-JSP에서 파라미터 로딩 시 인코딩 지정 필요
+<%
+	request.setCharacterEncoding("utf-8");
+	String name = request.getParameter("name");
+%>
+
+request 기본 객체 - 요청 헤더 정보 읽기
+getHeader(String name)	String
+지정한 이름의 헤더 값을 구한다.
+getHeaders(String name)	java.util.Enumeration
+지정한 이름의 헤더 목록을 구한다.
+getHeaderName()	java.util.Enumeration
+모든 헤더의 이름을 구한다.
+getIntHeader(String name)	int
+지정한 헤더의 값을 정수 값으로 읽어 온다.
+getDateHeader(String name)	long
+지정한 헤더의 값을 시간 값으로 읽어 온다.
+
+response 기본객체
+-웹 브라우저에 전송하는 응답 정보 설정
+-주요 기능
+  - 헤더 정보 입력
+  - 리다이렉트 처리
+
+response 기본 객체 - 헤더 설정 메서드
+addDateHeader(String name, long date)	void
+name 헤더에 date를 추가한다. date는 1970년 1월 1일 이후 흘러간 시간을 1/1000초 단위로 나타낸다.
+addHeader(String name, String value)	void
+name 헤더에 value를 값으로 추가한다.
+addIntHeader(String name, int value) 	void
+name 헤더에 정수 값 value를 추가한다.
+setDateHeader(String name, long date)	void
+name 헤더의 값을 date로 지정한다. date는 1970년 1월 1일 이후 흘러간 시간을 1/1000초 단위로 나타낸다.
+setHeader(String name, String value)	void
+name 헤더의 값을 value로 지정한다.
+setIntHeader(String name, int value)	void
+name 헤더의 값을 정수 값 value로 지정한다.
+
+리다이렉트(Redirect)
+-특정 페이지로 이동하라고 웹 브라우저에 응답
+웹브라우저 1. 요청보냄 -> a.jsp
+a.jsp 2. b.jsp로 리다이렉트 하라고 지정함 -> 웹브라우저
+웹브라우저 3. b.jsp를 요청함 -> b.jsp
+-response.sendRedirect(String location)로 구현
+============================================
+==자바 기초 문법=
+-기본 데이터 타입
+-변수 & 레퍼런스
+-타입 변환
+-연산자
+-코드블록
+-조건문
+-반복 처리
+-클래스
+
+
+
+
+
+

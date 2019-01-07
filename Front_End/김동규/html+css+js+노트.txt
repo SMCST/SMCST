@@ -1,0 +1,55 @@
+2019-01-07 중앙학원
+html css 노트
+ul 태그는 원래 bullet이 있는데, css 에서 list-style:none;으로 해서
+bullet을 없앴음.
+ul태그 -> li 태그
+
+<input type="checkbox"> 다중 선택 태그
+<input type="radio"> 1개만 선택 가능 태그
+
+checkbox 랑 radio랑 선택할 때 이름(텍스트)를 눌러도 선택가능하게
+만드려면, label 태그를 이용해서 ul, ol 등의 태그와 텍스트를 같이 묶어야한다.
+
+<fieldset>, <legend> 태그 - 폼 요소 그룹핑하기
+예) 로그인정보, 개인정보 그룹핑하기.
+<fieldset>
+   <legend>로그인정보</legend>
+   <!-- legend 태그는 없어도 됨 -->
+</fieldset>
+
+사용자가 정보를 입력하는 <input> 태그
+<input type="유형" [속성="속성값"]>
+
+type="hidden" - 히든 필드 만들기
+화면상의 폼에는 보이지 않지만, 사용자가 입력을 마치고 폼을 서버로 전송할 때
+서버로 함께 전송되는 요소.
+
+type="number" min, max, step 속성
+type="range" min, max 속성
+type="color" value 속성 (누르면 색을 고를 수 있는 팝업이 뜬다)
+type="image" src, alt 속성 (주로 submit기능의 버튼을 이미지를 넣어 만듦)
+type="button" onclick 속성 (onclick="window.open()")
+
+<form>
+  <button type="submit">
+    <img src="images/tick.png" alt="">전송하기
+  </button>
+</form>
+
+마우스 올리면 버튼 색 바뀌는 거 - button-css.html 참고하기.
+
+type="file" 
+파일 첨부할 수 있게 하는 팝업을 띄운다.
+
+placeholder 속성 = input 태그안에 투명색의 글자로 표시.
+
+<datalist id="choices">
+  <option value="computer" label="컴퓨터과학과">
+  ...
+</datalist>
+
+<textarea name="intro" cols="5" rows="6></textarea>
+
+html 끝.
+
+css 기초.
