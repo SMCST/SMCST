@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>설문조사</title>
+</head>
+<body>
+	<fieldset>
+		<legend>날짜 선택</legend>
+		<ul>
+			<li>
+				<p>신청할 날짜를 선택해주세요.</p>
+				<label><input type="date" id="start"></label> ~ 
+				<label><input type="date" id="end"></label> 까지
+			</li>
+			<li>
+				<p>시간을 선택해주세요.</p>
+				<label>시작시간<input type="time" value="09:00" id="start"></label>
+				<label>종료시간<input type="time" value="18:00" id="end"</label>
+			</li>
+
+	</fieldset>
+	<fieldset>
+		<legend>라디오버튼</legend>
+		<p>신청할 과목을 선택하세요(1과목만 가능)</p>
+			<label><input type="radio" name="subject" value="speaking">회화</label>
+			<label><input type="radio" name="subject" value="grammar">문법</label>
+			<label><input type="radio" name="subject" value="writing">작문</label>
+	</fieldset>
+	<fieldset>
+		<legend>체크박스</legend>
+		<p>메일로 받고 싶은 뉴스 주제를 선택해 주세요(복수 선택 가능)</p>
+			<label><input type="checkbox" name="mailing1" value="speaking">해외 단신</label>
+			<label><input type="checkbox" name="mailing2" value="speaking">5분 회화</label>
+			<label><input type="checkbox" name="mailing3" value="speaking">모닝팝스</label>
+	</fieldset>
+	<fieldset>
+		<legend>색상 선택</legend>
+		<p>원하는 색상을 선택해 주세요.</p>
+			<label>선호색상 <input type="color" value="#00ff00"></label>
+	</fieldset>
+	<fieldset>
+		<legend>메일링 리스트 등록</legend>
+		<form action="register.php" method="post">
+			<label>메일주소 <input type="text"></label>
+			<input type="submit" value="제출">
+			<input type="reset" value="다시입력">
+		</form>
+	</fieldset>
+</body>
+</html>

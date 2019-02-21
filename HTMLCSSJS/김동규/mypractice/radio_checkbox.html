@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>웹 폼</title>
+	<style>
+		body {
+			background-color:#fff;
+		}
+		form fieldset {
+			margin-bottom: 25px;
+		}
+		form legend {
+			font-size: 15px;
+			font-weight: 600;
+		}
+		form label.reg {
+			font-size:14px;
+			color:#300;
+			font-weight:bold;
+			width:110px;
+			float:left;
+			text-align:right;
+			margin-right:10px;
+		}
+		form ul li {
+			list-style: none;
+			margin: 15px 0;
+			font-size: 14px;
+		}
+		#member, #stuffs {
+			width: 50px;
+		}
+		#pre {
+			margin-left: 15px;
+		}
+	</style>
+</head>
+<body>
+	<form>
+		<fieldset>
+			<legend>신청 과목</legend>
+			<p>이 달에 신청할 과목을 신청하세요 (1과목만 가능)</p>
+			<label><input type="radio" name="subject" value="speaking">회화</label>
+			<label><input type="radio" name="subject" value="grammar">문법</label>
+			<label><input type="radio" name="subject" value="writing">작문</label>
+		</fieldset>
+		<fieldset>
+			<legend>메일링</legend>
+			<p>메일로 받고 싶은 뉴스 주제를 선택해 주세요 (복수 선택 가능)</p>
+			<label><input type="checkbox" name="mailing1" value="news">해외단신</label>
+			<label><input type="checkbox" name="mailing2" value="dialog">5분회화</label>
+			<label><input type="checkbox" name="mailing3" value="pops">모닝팝스</label>
+		</fieldset>
+		<fieldset>
+			<legend>과 티셔츠 설문</legend>
+			<p>올해 과 티(T)를 만들려고 합니다. 원하는 색상을 추천해 주세요.</p>
+			<label>선호색상 <input type="color" value="#00ff00"></label>
+		</fieldset>
+	</form>
+	<form>
+		<h3>조회기간 선택</h3>
+		<label><input type="date" id="start"></label>
+		<label><input type="date" id="end"></label>
+	</form>
+	<form>
+		<h3>대관시간을 선택하세요(오늘)</h3>
+		<label>시작 시간<input type="time" value="09:00" id="start"></label>,
+		<label>종료 시간<input type="time" value="10:00" id="end"></label>
+
+		<h3>대관시간을 선택하세요(다른날짜)</h3>
+		<label>시작 시간<input type="datetime-local" value="2016-03-02T09:00" id="start"></label>, <label>종료 시간<input type="datetime-local" value="2016-03-02T18:00" id="end"></label>
+	</form>
+	<form action="#register.php" method="post">
+		<label>메일 주소<input type="text"></label>
+		<input type="submit" value="제출">
+		<input type="reset" value="다시입력">
+	</form>
+	<form>
+		<label>아이디<input type="text" size="15"></label>
+		<label>비밀번호<input type="password" size="15"></label>
+		<input type="image" id="butt" src="images/login.jpg" alt="login">
+	</form>
+	<form>
+		<input type="button" value="새 탭 열기" onclick="window.open()">
+		<input type="file" value="첨부">
+	</form>
+	<form>
+		<label class="reg" for="subj">영어회화(초급)</label><input type="text" id="subj" value="오전 9:00~11:00" readonly>
+		<label class="reg" for="uid">학번</label><input type="text" id="uid" placeholder="하이푼없이 입력" maxlength="8" required>
+		<label class="reg" for="book">교재</label><input type="number" id="book" value="1" min="1" max="3">
+		<label>아이디: <input type="text" id="user_id" size="10" minlength="4" maxlength="15"></label><small style="color: red;">4~15자리 이내의 영문과 숫자</small>
+	</form>
+</body>
+</html>

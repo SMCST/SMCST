@@ -12,13 +12,13 @@ pageEncoding="UTF-8"%>
 
 <meta name="viewport" content="width=device-width" , initial-scale="1.0">
 
-<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/css/bootstrap.css">
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-<script src="js/js/common.js"></script> 
+<script src="js/js/common.js"></script>
 
-<title>회원가입 폼</title>
+<title>SMU 튜터링 시스템</title>
 
 </head>
 
@@ -46,7 +46,7 @@ aria-expanded="false">
 
 </button>
 
-<a class="navbar-brand" href="main.jsp">JSP 게시판 웹 사이트</a>
+<a class="navbar-brand" href="main.jsp">SMU 튜터링 시스템</a>
 
 </div>
 
@@ -97,7 +97,7 @@ aria-expanded="false">접속하기<span class="caret"></span></a>
 
 <div class="jumbotron" style="padding-top:20px;">
 
-<form method="post" name="form1" onsubmit="return doLogin()" enctype="multipart/form-data">
+<form method="post" name="form1" onsubmit="return doJoin()" enctype="multipart/form-data">
 
 <h3 style="text-align:center;">회원가입 화면</h3>
 
@@ -152,6 +152,6 @@ aria-expanded="false">접속하기<span class="caret"></span></a>
 </div>
 	
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>	
-<script src="js/bootstrap.min.js"></script> 
+<script src="js/js/bootstrap.min.js"></script> 
 
 </body></html>

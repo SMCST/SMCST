@@ -5,10 +5,12 @@ pageEncoding="UTF-8"%>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width" , initial-scale="1.0">
-<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/css/bootstrap.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-<title>JSP 게시판 만들기</title>
+<script type="text/javascript" src="js/js/common.js"></script>
+
+<title>SMU 튜터링 시스템</title>
 </head>
 <body>
 
@@ -22,7 +24,7 @@ aria-expanded="false">
 <span class="icon-bar"></span>
 
 </button>
-<a class="navbar-brand" href="main.jsp">JSP 게시판 웹 사이트</a>
+<a class="navbar-brand" href="main.jsp">SMU 튜터링 시스템</a>
 </div>
 
 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -49,7 +51,7 @@ aria-expanded="false">접속하기<span class="caret"></span></a>
 <div class="col-lg-4"></div>
 <div class="col-lg-4">
 <div class="jumbotron" style="padding-top:20px;">
-<form method="post" action="loginAction.jsp">
+<form method="post" name="form1" action="loginAction.jsp" onsubmit="return doLogin()">
 <h3 style="text-align:center;">로그인 화면</h3>
 <div class="form-group">
 <input type="text" class="form-control" placeholder="아이디" name="userID" maxlength="22">
@@ -78,7 +80,7 @@ aria-expanded="false">접속하기<span class="caret"></span></a>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
-<script src="js/bootstrap.min.js"></script> 
+<script src="js/js/bootstrap.min.js"></script> 
 
 </body>
 

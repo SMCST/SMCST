@@ -12,6 +12,25 @@ function doLogin(){
 		document.form1.userPassword.focus();
 		return false;
 	}
+	
+	document.form1.action='./loginAction.jsp';
+	document.form1.submit();	
+}
+
+
+function doJoin(){
+
+
+	if(document.form1.userID.value.length==0){
+		alert('아이디를 입력해 주세요.');
+		document.form1.userID.focus();
+		return false;
+	}
+	if(document.form1.userPassword.value.length==0){
+		alert('비밀번호를 입력해 주세요.');
+		document.form1.userPassword.focus();
+		return false;
+	}
 	if(document.form1.userPassword2.value.length==0){
 		alert('비밀번호재확인을 입력해 주세요.');
 		document.form1.userPassword2.focus();
