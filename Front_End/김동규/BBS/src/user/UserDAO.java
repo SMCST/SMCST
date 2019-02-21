@@ -59,11 +59,12 @@ public class UserDAO {
 			pstmt.setString(1,  userID);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
+				System.out.println(rs.getString(1).equals(userPassword));
 				if(rs.getString(1).equals(userPassword)) {
 					return 1;
+				}else{
+					return 0;
 				}
-			}else {
-				return 0;
 			}
 			return -1;
 		}catch(Exception e) {
