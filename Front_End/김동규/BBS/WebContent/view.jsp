@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter"%>
+<%@ page import="bbs.Bbs"%>
+<%@ page import="bbs.BbsDAO"%>
 <!DOCTYPE html>
 
 <html>
@@ -30,6 +32,18 @@
 		if (session.getAttribute("userID") != null) {
 			userID = (String) session.getAttribute("userID");
 		}
+		int bbsBoardNumber = 0;
+		if (request.getParameter("bbsBoardNumber") != null) {
+			bbsBoardNumber = Integer.parseInt(request.getParameter("bbsBoardNumber"));
+		}
+		if(bbsBoardNumber == 0) {
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('유효하지 않은 글입니다.')");
+			script.println("location.href = 'bbs.jsp'");
+			script.println("</script>");
+		}
+		Bbs bbs = new BbsDAO().getBbs(bbsBoardNumber);
 	%>
 
 
@@ -58,8 +72,8 @@
 
 			<ul class="nav navbar-nav">
 
-				<li class="active"><a href="main.jsp">메인</a>
-				<li><a href="bbs.jsp">게시판</a>
+				<li><a href="main.jsp">메인</a>
+				<li class="active"><a href="bbs.jsp">게시판</a>
 			</ul>
 			<%
 				if (userID == null) {
@@ -106,42 +120,48 @@
 
 	</nav>
 	<div class="container">
-		<div class="jumbotron">
-			<div class="container">
-				<h1 class="title">웹 사이트 소개</h1>
-				<p>이 웹사이트는 상명대학교 튜터링 시스템입니다.</p>
-				<p><a class="btn btn-primary btn-pull" href="#" role="button">자세히 알아보기</a></p>
-			</div>
-		</div>
-	</div>
-	<div class="container">
-		<div id="myCarousel" class="carousel slide" data-ride="carousel">
-			<ol class="carousel-indicators">
-				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-				<li data-target="#myCarousel" data-slide-to="1" class="1"></li>
-				<li data-target="#myCarousel" data-slide-to="2" class="2"></li>
-			</ol>
-			<div class="carousel-inner">
-				<div class="item active">
-					<img src="img/urname3.png">
-				</div>
-				<div class="item">
-					<img src="img/urname4.png">
-				</div>
-				<div class="item">
-					<img src="img/urname5.png">
-				</div>
-			</div>
+		<div class="row">
+			<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
+				<thead>
+					<tr>
+						<th colspan="3" style="background-color: #eeeeee; text-align: center;">게시판 글쓰기 보기</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td style="width: 20%;">글 제목</td>
+						<td colspan="2"><%= bbs.getBbsTitle().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&rt").replaceAll("\n", "<br>") %></td>
+					</tr>
+					<tr>
+						<td>작성자</td>
+						<td colspan="2"><%= bbs.getBbsID() %></td>
+					</tr>
+					<tr>
+						<td>작성 일자</td>
+						<td colspan="2"><%= bbs.getBbsDate().substring(0, 4) + "년 " + bbs.getBbsDate().substring(5, 7) + "월 " + bbs.getBbsDate().substring(8, 10)+ "일 " %></td>
+					</tr>
+					<tr>
+						<td>내용</td>
+						<td colspan="2" style="height: 200px; min-height: 200px; text-align: left;"><%= bbs.getBbsContents().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&rt").replaceAll("\n", "<br>") %></td>
+					</tr>
+				</tbody>
+			</table>
+			<a href="bbs.jsp" class="btn btn-primary">목록</a>
+			<%
+				if(userID != null && userID.equals(bbs.getBbsID())) {
+				
+			%>
+				<a href="update.jsp?bbsBoardNumber=<%= bbsBoardNumber %>" class="btn btn-primary">수정</a>
+				<a onclick="return confirm('정말로 삭제하시겠습니까?')" href="deleteAction.jsp?bbsBoardNumber=<%= bbsBoardNumber %>" class="btn btn-primary">삭제</a>
+			<%
+				}
+			%>
+			<input type="button" class="btn btn-primary pull-right" onclick="location.href='write.jsp'" value="글쓰기"></a>
 		
-			<a class="left carousel-control" href="#myCarousel" data-slide="prev">
-				<span class="glyphicon glyphicon-chevron-left"></span>
-			</a>
-			<a class="right carousel-control" href="#myCarousel" data-slide="next">
-				<span class="glyphicon glyphicon-chevron-right"></span>
-			</a>
-			
 		</div>
-		<div style="padding-bottom: 10px;"></div>
 	</div>
+
+
+
 </body>
 </html>

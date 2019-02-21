@@ -58,8 +58,8 @@
 
 			<ul class="nav navbar-nav">
 
-				<li class="active"><a href="main.jsp">메인</a>
-				<li><a href="bbs.jsp">게시판</a>
+				<li><a href="main.jsp">메인</a>
+				<li class="active"><a href="bbs.jsp">게시판</a>
 			</ul>
 			<%
 				if (userID == null) {
@@ -106,42 +106,31 @@
 
 	</nav>
 	<div class="container">
-		<div class="jumbotron">
-			<div class="container">
-				<h1 class="title">웹 사이트 소개</h1>
-				<p>이 웹사이트는 상명대학교 튜터링 시스템입니다.</p>
-				<p><a class="btn btn-primary btn-pull" href="#" role="button">자세히 알아보기</a></p>
-			</div>
-		</div>
-	</div>
-	<div class="container">
-		<div id="myCarousel" class="carousel slide" data-ride="carousel">
-			<ol class="carousel-indicators">
-				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-				<li data-target="#myCarousel" data-slide-to="1" class="1"></li>
-				<li data-target="#myCarousel" data-slide-to="2" class="2"></li>
-			</ol>
-			<div class="carousel-inner">
-				<div class="item active">
-					<img src="img/urname3.png">
-				</div>
-				<div class="item">
-					<img src="img/urname4.png">
-				</div>
-				<div class="item">
-					<img src="img/urname5.png">
-				</div>
-			</div>
+		<div class="row">
+		<form method="post" action="writeAction.jsp">
+			<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
+				<thead>
+					<tr>
+						<th colspan="2" style="background-color: #eeeeee; text-align: center;">게시판 글쓰기 양식</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><input type="text" class="form-control" placeholder="글 제목" name="bbsTitle" maxlength="50"></td>
+					</tr>
+					<tr>
+						<td><textarea class="form-control" placeholder="글 내용" name="bbsContents" maxlength="1000" style="height: 350px; resize: none;"></textarea></td>
+
+					</tr>
+				</tbody>
+			</table>
+			<input type="submit" class="btn btn-primary pull-right" value="글쓰기"></a>
+		</form>
 		
-			<a class="left carousel-control" href="#myCarousel" data-slide="prev">
-				<span class="glyphicon glyphicon-chevron-left"></span>
-			</a>
-			<a class="right carousel-control" href="#myCarousel" data-slide="next">
-				<span class="glyphicon glyphicon-chevron-right"></span>
-			</a>
-			
 		</div>
-		<div style="padding-bottom: 10px;"></div>
 	</div>
+
+
+
 </body>
 </html>

@@ -10,8 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width" , initial-scale="1.0">
-<link rel="stylesheet" href="css/css/bootstrap.css">
-<link rel="stylesheet" href="css/css/custom.css">
+<link rel="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <title>회원 목록</title>
 </head>

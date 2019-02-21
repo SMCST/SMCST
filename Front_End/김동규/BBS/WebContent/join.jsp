@@ -1,7 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-
-pageEncoding="UTF-8"%>
-
+	pageEncoding="UTF-8"%>
+<%@ page import="java.io.PrintWriter" %>
+<%
+	String userID = null;
+if(session.getAttribute("userID") != null) {
+	userID = (String) session.getAttribute("userID");
+}
+if (userID != null) {
+	PrintWriter script = response.getWriter();
+	script.println("<script>");
+	script.println("alert('이미 로그인이 되어있습니다.')");
+	script.println("location.href = 'main.jsp'");
+	script.println("</script>");
+}
+%>
 <!DOCTYPE html>
 
 <html>
@@ -13,8 +25,9 @@ pageEncoding="UTF-8"%>
 <meta name="viewport" content="width=device-width" , initial-scale="1.0">
 
 <link rel="stylesheet" href="css/css/bootstrap.css">
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/css/custom.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 <script src="js/js/common.js"></script>
 
@@ -24,134 +37,133 @@ pageEncoding="UTF-8"%>
 
 <body>
 
- 
-
-<nav class="navbar navbar-default">
-
-<div class="naver-header">
-
-<button type="button" class="navbar-toggle collapsed"
-
-data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-
-aria-expanded="false">
 
 
-<span class="icon-bar"></span> 
+	<nav class="navbar navbar-default">
 
-<span class="icon-bar"></span> 
+		<div class="naver-header">
 
-<span class="icon-bar"></span>
-
-
-</button>
-
-<a class="navbar-brand" href="main.jsp">SMU 튜터링 시스템</a>
-
-</div>
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+				aria-expanded="false">
 
 
-<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-<ul class="nav navbar-nav">
-
-<li><a href="main.jsp">메인</a>
-
-<li><a href="bbs.jsp">게시판</a>
-
-</ul>
-
-<ul class="nav navbar-nav navbar-right">
-
-<li class="dropdown">
-
-<a href="#" class="dropdown-toggle" 
-
-data-toggle="dropdown" role="button" aria-haspopup="true" 
-
-aria-expanded="false">접속하기<span class="caret"></span></a>
+				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
 
 
-<ul class="dropdown-menu">
+			</button>
 
-<li class="active"><a href="login.jsp">로그인</a></li>
+			<a class="navbar-brand" href="main.jsp">SMU 튜터링 시스템</a>
 
-<li><a href="join.jsp">회원가입</a></li>
-
-</ul>
-
-</li>
-
-</ul>
-
-</div>
-
-</nav>
+		</div>
 
 
-<div class="container">
+		<div class="collapse navbar-collapse"
+			id="bs-example-navbar-collapse-1">
 
-<div class="col-lg-4"></div>
+			<ul class="nav navbar-nav">
 
-<div class="col-lg-4">
+				<li><a href="main.jsp">메인</a>
+				<li><a href="bbs.jsp">게시판</a>
+			</ul>
 
-<div class="jumbotron" style="padding-top:20px;">
+			<ul class="nav navbar-nav navbar-right">
 
-<form method="post" name="form1" onsubmit="return doJoin()" enctype="multipart/form-data">
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown" role="button" aria-haspopup="true"
+					aria-expanded="false">접속하기<span class="caret"></span></a>
 
-<h3 style="text-align:center;">회원가입 화면</h3>
 
-<div class="form-group">
+					<ul class="dropdown-menu">
 
-<input type="email" class="form-control" placeholder="아이디(이메일)" name="userID" maxlength="22">
+						<li class="active"><a href="login.jsp">로그인</a></li>
 
-</div>
+						<li><a href="join.jsp">회원가입</a></li>
 
-<div class="form-group">
+					</ul></li>
 
-<input type="password" class="form-control" placeholder="비밀번호" name="userPassword" maxlength="20">
+			</ul>
 
-</div>
+		</div>
 
-<div class="form-group">
+	</nav>
 
-<input type="password" class="form-control" placeholder="비밀번호 재확인" name="userPassword2" maxlength="20">
 
-</div>
+	<div class="container">
 
-<div class="form-group">
+		<div class="col-lg-4"></div>
 
-<input type="text" class="form-control" placeholder="이름" name="userName" maxlength="20">
+		<div class="col-lg-4">
 
-</div>
+			<div class="jumbotron" style="padding-top: 20px;">
 
-<div class="form-group">
+				<form method="post" name="form1" onsubmit="return doJoin()"
+					enctype="multipart/form-data">
 
-<input type="text" class="form-control" placeholder="생년월일" name="userBirth" maxlength="20">
+					<h3 style="text-align: center;">회원가입 화면</h3>
 
-</div>
+					<div class="form-group">
 
-<div class="form-group">
+						<input type="email" class="form-control" placeholder="아이디(이메일)"
+							name="userID" maxlength="22">
 
-<input type="tel" class="form-control" placeholder="전화번호" name="userPhone" maxlength="20">
+					</div>
 
-</div>
+					<div class="form-group">
 
-<div class="form-group">
+						<input type="password" class="form-control" placeholder="비밀번호"
+							name="userPassword" maxlength="20">
 
-<input type="file" class="form-control" placeholder="프로필사진" name="userPicture">
+					</div>
 
-</div>
-		<input type="submit" class="btn btn-primary form-control" value="회원가입">			
-</form>
-</div>
-		
-</div>
-<div class="col-lg-4"></div>
-	
-</div>
-	
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>	
-<script src="js/js/bootstrap.min.js"></script> 
+					<div class="form-group">
 
-</body></html>
+						<input type="password" class="form-control" placeholder="비밀번호 재확인"
+							name="userPassword2" maxlength="20">
+
+					</div>
+
+					<div class="form-group">
+
+						<input type="text" class="form-control" placeholder="이름"
+							name="userName" maxlength="20">
+
+					</div>
+
+					<div class="form-group">
+
+						<input type="text" class="form-control" placeholder="생년월일"
+							name="userBirth" maxlength="20">
+
+					</div>
+
+					<div class="form-group">
+
+						<input type="tel" class="form-control" placeholder="전화번호"
+							name="userPhone" maxlength="20">
+
+					</div>
+
+					<div class="form-group">
+
+						<input type="file" class="form-control" placeholder="프로필사진"
+							name="userPicture">
+
+					</div>
+					<input type="submit" class="btn btn-primary form-control"
+						value="회원가입">
+				</form>
+			</div>
+
+		</div>
+		<div class="col-lg-4"></div>
+
+	</div>
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="js/js/bootstrap.min.js"></script>
+
+</body>
+</html>

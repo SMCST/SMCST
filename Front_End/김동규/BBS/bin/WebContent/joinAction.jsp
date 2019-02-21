@@ -60,11 +60,10 @@
 <body>
 
 <%
-	System.out.println(userID);
-	System.out.println(userPassword);
-	System.out.println(userName);
-	System.out.println(userPhone);
-
+System.out.println(userID);
+System.out.println(userPassword);
+System.out.println(userName);
+System.out.println(userPhone);
 if(userID == null || userPassword == null || userName == null || userPhone == 0){
 
 PrintWriter script = response.getWriter();
