@@ -85,9 +85,9 @@
 				</address>
 			</div>
 			<h3 style="border-bottom: 1px solid #ccc;"><a href="ClassParticipant.jsp">참여자 목록</a></h3>
-				<p class="menu"><img class='SidePhoto' src="images/1.jpg">김해님</p>
-				<p class="menu"><img class='SidePhoto' src="images/1.png">정성옥</p>
-				<p class="menu"><img class='SidePhoto' src="images/1.png">김창성</p>
+				<p class="menu"><img class='SidePhoto' src="images/1.jpg"><a href="ClassParticipant.jsp#tutor">김해님(튜터자리)</a></p>
+				<p class="menu"><img class='SidePhoto' src="images/1.png">정성옥(튜티1)</p>
+				<p class="menu"><img class='SidePhoto' src="images/1.png">김창성(튜티2)</p>
 			<h3 style="border-bottom: 1px solid #ccc;">튜티/튜터메뉴</h3>
 			<p class="menu"><a href="ClassRoomMain.jsp">강의실 홈</a></p>
 			<p class="menu"><a href="ClassNotify.jsp">공지사항</a></p>
@@ -102,7 +102,7 @@
 		</div>
 		<div id="contents">
 			<p class="ClassBoard">공지사항</p>
-			<p style="text-align: right; margin-right: 80px; font-size: 18px; font-weight: bold;">더보기</p>
+			<p style="text-align: right; margin-right: 80px; font-size: 18px; font-weight: bold;"><a href="ClassNotify.jsp">더보기</a></p>
 			<table style="margin-left: 50px; text-indent:80px; text-align: left; line-height:2;">
 					<tr>
 						<td style="width: 450px;">튜터링이 시작되었습니다. 환영합니다!</td>
@@ -117,7 +117,7 @@
 					
 			</table>
 			<p class="ClassBoard">회의록</p>
-			<p style="text-align: right; margin-right: 80px; font-size: 18px; font-weight: bold;">더보기</p>	
+			<p style="text-align: right; margin-right: 80px; font-size: 18px; font-weight: bold;"><a href="ClassMeetingLog.jsp">더보기</a></p>	
 				<table style="margin-left: 50px; text-indent:80px; text-align: left; line-height:2;">
 					<tr>
 						<td style="width: 450px;">반갑습니다. 안녕하세요? 튜터링이 시작되었습니다.</td>
@@ -138,7 +138,7 @@
 					</tr>
 			</table>
 			<p class="ClassBoard">자료실</p>
-			<p style="text-align: right; margin-right: 80px; font-size: 18px; font-weight: bold;">더보기</p>
+			<p style="text-align: right; margin-right: 80px; font-size: 18px; font-weight: bold;"><a href="ClassResourceCenter.jsp">더보기</a></p>
 			<table style="margin-left: 50px; text-indent:80px; text-align: left; line-height:2;">
 					<tr style="border-bottom: 1px solid #ccc;">
 						<td style="width: 450px;">튜터링이 시작되었습니다. 환영합니다!</td>

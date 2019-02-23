@@ -8,9 +8,5 @@
 </head>
 <body>
 
-
-
-<a name="tutor">ฑ่วุดิ</a>
-
 </body>
 </html>
