@@ -62,13 +62,14 @@
 					<td rowspan="3">
 			 			<img src="images/title.jpg" style="	float: left; height: 150px; width: 240px; padding: 20px;"/>
   				 	</td>
-  				 		<td valign=bottom style="text-indent:20px; font-weight: bold; font-size:20px;">Tutoring Title</td>
+  				 		<td valign=bottom style="text-indent:20px; font-weight: bold; font-size:20px;">
+  				 		<a href="ClassIntroduceTutoring.jsp">Tutoring Title</a></td>
   				 </tr>
   				 <tr>
   				 		<td valign=middle style="text-indent:20px; font-weight: bold; font-size:20px;">Subject</td>
   				 </tr>
   				 <tr> 
-  				 		<td valign=top style="text-indent:20px; font-weight: bold; font-size:20px;">tutor name</td>
+  				 		<td valign=top style="text-indent:20px; font-weight: bold; font-size:20px;"><a href="ClassParticipant.jsp#tutor">tutor name</a></td>
 				</tr>
 			</table>
 		</div>
@@ -82,19 +83,18 @@
 			</div>
 			<h3 style="border-bottom: 1px solid #ccc;"><a href="ClassParticipant.jsp">참여자 목록</a></h3>
 				<p class="menu"><img class='SidePhoto' src="images/1.jpg"><a href="ClassParticipant.jsp#tutor">김해님(튜터자리)</a></p>
-				<p class="menu"><img class='SidePhoto' src="images/1.png">정성옥(튜티1)</p>
-				<p class="menu"><img class='SidePhoto' src="images/1.png">김창성(튜티2)</p>
-			<h3 style="border-bottom: 1px solid #ccc;">튜티/튜터메뉴</h3>
+				<p class="menu"><img class='SidePhoto' src="images/1.png"><a href="ClassParticipant.jsp#tutee1">정성옥(튜티1)</a></p>
+				<p class="menu"><img class='SidePhoto' src="images/1.png"><a href="ClassParticipant.jsp#tutee2">김창성(튜티2)</a></p>
+			<h3 style="border-bottom: 1px solid #ccc;">메뉴</h3>
 			<p class="menu"><a href="ClassRoomMain.jsp">강의실 홈</a></p>
 			<p class="menu"><a href="ClassNotify.jsp">공지사항</a></p>
 			<p class="menu"><a href="ClassMeetingLog.jsp">회의록</a></p>
 			<p class="menu"><a href="ClassResourceCenter.jsp">자료실</a></p>
-			<p class="menu"><a href="ClassReportSubmit.jsp">수업보고서 제출</a></p>
-			<p class="menu"><a href="ClassEvaluation.jsp">튜터링 평가</a></p>
+			<p class="menu"><a href="ClassReport.jsp">과제 게시판</a></p>
 			<p class="menu"><a href="ClassPetition.jsp">청원 게시판</a></p>
 			<p class="menu"><a href="ClassReference.jsp">참고 메뉴</a></p>
-			<p class="menu"><a href="ClassReportCheck.jsp">수업보고서 조회</a></p>
-			<p class="menu"><a href="ClassGrade.jsp">평점조회</a></p>
+			<p class="menu"><a href="ClassEvaluation.jsp">튜터링 평가</a></p>
+			<p class="menu"><a href="ClassGrade.jsp">튜터링 평점조회</a></p>
 		</div>
 		<div id="contents">
 		<h1 style="text-indent: 50px; margin-top: 70px;">회의록</h1>
@@ -104,8 +104,10 @@
 				<option value="title">제목</option>
 				<option value="contents">내용</option>
 				<option value="titlecontents">제목+내용</option>
+				<option value="titlecontents">댓글</option>
 				<option value="titlecontents">작성자</option>
 				<option value="titlecontents">작성일자</option>
+				<%//작성일자는 작성기간 검색해 특정 기간의 글들을 조회 %>
 			</select>
 		<input type="text" id="ClassNotifySearch"><input type="button" value="검색" style="background: white; border: 1px solid black;">
 		</p>
@@ -134,9 +136,11 @@
 				<a href="#">5</a>
 				<input type="button" value="다음" style="background: white; border: 1px solid black;">
 			</div>
+			<form action="ClassBoardWrite.jsp" method="post">
 			<p style="text-align: right;">
-				<input type="button" value="글쓰기" style="background: white; border: 1px solid black;">
+				<input type="submit" value="글쓰기" style="background: white; border: 1px solid black;">
 			</p>
+			</form>
 		</div>
 		</div>
 		<div id="footer">

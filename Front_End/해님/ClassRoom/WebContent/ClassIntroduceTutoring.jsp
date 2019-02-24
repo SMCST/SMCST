@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<%@ page import="java.io.PrintWriter" %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,6 +44,12 @@
     .menu{
     	text-indent: 20px;
     	line-height:2; 
+    }
+    .ClassBoard{
+    	text-indent: 60px;
+    	font-size: 22px;
+    	font-weight: bold;
+    	margin-top: 60px;
     }
     	a, a:hover{
 		color: #000000;
@@ -97,50 +101,28 @@
 			<p class="menu"><a href="ClassGrade.jsp">튜터링 평점조회</a></p>
 		</div>
 		<div id="contents">
-		<h1 style="text-indent: 50px; margin-top: 70px;">자료실</h1>
-		<p style="text-indent: 50px; color: gray;">1 개의 글</p>
-		<p style="text-align: right;">
-		<select size="1" id="class">
-				<option value="title">제목</option>
-				<option value="contents">내용</option>
-				<option value="titlecontents">제목+내용</option>
-				<option value="titlecontents">작성자</option>
-				<option value="titlecontents">작성일자</option>
-			</select>
-		<input type="text" id="ClassNotifySearch"><input type="button" value="검색" style="background: white; border: 1px solid black;">
-		</p>
-			<table style="margin-left: 50px; line-height:2; border: 1px solid lightgray;">
-					<tr style="text-align: center; background: #EEEEEE;">
-						<td>게시번호</td>
-						<td>제목</td>
-						<td>작성자</td>
-						<td>작성일자</td>
-						<td>조회수</td>
-					</tr>
-					<tr>
-						<td style="text-align: center; width: 100px;">100</td>
-						<td style="width: 500px; text-indent: 10px;">환영합니다. 튜터링이 시작되었습니다!</td>
-						<td style="text-align: center; width: 100px;">김해님</td>
-						<td style="text-align: center; width: 100px;">2019-02-23</td>
-						<td style="text-align: center; width: 100px;">0</td>				
-					</tr>
+<%
+/*
+회원은 튜터링 강의종료일 일주일 전부터 강의종료일까지 자신이 수강한 튜터링을 한줄코멘트 작성과 함께 친절도, 성실성, 커리큘럼, 재미, 전달력을 각각 점수 매겨 평가할 수 있다.
+평가기간이 아닐때 경고알림==> 튜터링 평가 기간이 아닙니다.
+*/
+%>
+		<h1 style="text-indent: 50px; margin-top: 70px;">튜터링 소개</h1>
+		<fieldset style="margin-left: 50px; border: 1px solid lightgray;">
+			<table style="margin-top:30px; margin-left: 50px;line-height:2; ">
+				<tr>
+					<td style="text-align: center;">tutoring title</td>
+				</tr>
+				<tr>
+					<td style="text-align: center; width: 700px;">
+						<img src="images/title.jpg" height="300" width="400">
+					</td>
+				</tr>
+				<tr>
+					<td>이곳은 강의실 내에서 튜터링을 소개하는 페이지로, 튜터링 수강신청 할 때 보이는 튜터링 소개 부분의 소스를 담아야합니다.</td>
+				</tr>
 			</table>
-			<div style="text-align: center; margin-top: 50px; margin-left: 50px; margin-right: 50px;">
-				<input type="button" value="이전" style="background: white; border: 1px solid black;">
-				<a href="#">1</a>
-				<a href="#">2</a>
-				<a href="#">3</a>
-				<a href="#">4</a>
-				<a href="#">5</a>
-				<input type="button" value="다음" style="background: white; border: 1px solid black;">
-			</div>
-			
-			<form action="ClassBoardWrite.jsp" method="post">
-			<p style="text-align: right;">
-				<input type="submit" value="글쓰기" style="background: white; border: 1px solid black;">
-			</p>
-			</form>
-		</div>
+			</fieldset>
 		</div>
 		<div id="footer">
 		<p style="text-align:center; ">footer</p>

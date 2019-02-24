@@ -66,13 +66,14 @@
 					<td rowspan="3">
 			 			<img src="images/title.jpg" style="	float: left; height: 150px; width: 240px; padding: 20px;"/>
   				 	</td>
-  				 		<td valign=bottom style="text-indent:20px; font-weight: bold; font-size:20px;">Tutoring Title</td>
+  				 		<td valign=bottom style="text-indent:20px; font-weight: bold; font-size:20px;">
+  				 		<a href="ClassIntroduceTutoring.jsp">Tutoring Title</a></td>
   				 </tr>
   				 <tr>
   				 		<td valign=middle style="text-indent:20px; font-weight: bold; font-size:20px;">Subject</td>
   				 </tr>
   				 <tr> 
-  				 		<td valign=top style="text-indent:20px; font-weight: bold; font-size:20px;">tutor name</td>
+  				 		<td valign=top style="text-indent:20px; font-weight: bold; font-size:20px;"><a href="ClassParticipant.jsp#tutor">tutor name</a></td>
 				</tr>
 			</table>
 		</div>
@@ -86,19 +87,18 @@
 			</div>
 			<h3 style="border-bottom: 1px solid #ccc;"><a href="ClassParticipant.jsp">참여자 목록</a></h3>
 				<p class="menu"><img class='SidePhoto' src="images/1.jpg"><a href="ClassParticipant.jsp#tutor">김해님(튜터자리)</a></p>
-				<p class="menu"><img class='SidePhoto' src="images/1.png">정성옥(튜티1)</p>
-				<p class="menu"><img class='SidePhoto' src="images/1.png">김창성(튜티2)</p>
-			<h3 style="border-bottom: 1px solid #ccc;">튜티/튜터메뉴</h3>
+				<p class="menu"><img class='SidePhoto' src="images/1.png"><a href="ClassParticipant.jsp#tutee1">정성옥(튜티1)</a></p>
+				<p class="menu"><img class='SidePhoto' src="images/1.png"><a href="ClassParticipant.jsp#tutee2">김창성(튜티2)</a></p>
+			<h3 style="border-bottom: 1px solid #ccc;">메뉴</h3>
 			<p class="menu"><a href="ClassRoomMain.jsp">강의실 홈</a></p>
 			<p class="menu"><a href="ClassNotify.jsp">공지사항</a></p>
 			<p class="menu"><a href="ClassMeetingLog.jsp">회의록</a></p>
 			<p class="menu"><a href="ClassResourceCenter.jsp">자료실</a></p>
-			<p class="menu"><a href="ClassReportSubmit.jsp">수업보고서 제출</a></p>
-			<p class="menu"><a href="ClassEvaluation.jsp">튜터링 평가</a></p>
+			<p class="menu"><a href="ClassReport.jsp">과제 게시판</a></p>
 			<p class="menu"><a href="ClassPetition.jsp">청원 게시판</a></p>
 			<p class="menu"><a href="ClassReference.jsp">참고 메뉴</a></p>
-			<p class="menu"><a href="ClassReportCheck.jsp">수업보고서 조회</a></p>
-			<p class="menu"><a href="ClassGrade.jsp">평점조회</a></p>
+			<p class="menu"><a href="ClassEvaluation.jsp">튜터링 평가</a></p>
+			<p class="menu"><a href="ClassGrade.jsp">튜터링 평점조회</a></p>
 		</div>
 		<div id="contents">
 			<p class="ClassBoard">공지사항</p>
@@ -110,31 +110,16 @@
 						<td>조회 0</td>
 					</tr>
 					<tr>
-						<td>다음 튜터링 시간이 2시로 변경되었습니다.</td>
+						<td style="width: 450px;">튜터링이 시작되었습니다. 환영합니다!</td>
 						<td>2019-02-22</td>
-						<td>조회 0</td>			
+						<td>조회 0</td>
 					</tr>
-					
 			</table>
 			<p class="ClassBoard">회의록</p>
 			<p style="text-align: right; margin-right: 80px; font-size: 18px; font-weight: bold;"><a href="ClassMeetingLog.jsp">더보기</a></p>	
 				<table style="margin-left: 50px; text-indent:80px; text-align: left; line-height:2;">
 					<tr>
-						<td style="width: 450px;">반갑습니다. 안녕하세요? 튜터링이 시작되었습니다.</td>
-						<td>2019-02-22</td>
-						<td>조회 0</td>			
-					</tr>
-					<tr><td>Dd</td>
-						<td>2019-02-22</td>
-						<td>조회 0</td>			
-					</tr>
-					<tr><td>dfksldmklcv</td>
-						<td>2019-02-22</td>
-						<td>조회 0</td>			
-					</tr>
-					<tr><td>다음주 수요일은 쉽니다. 공지사항을 읽어주세요.</td>
-						<td>2019-02-22</td>
-						<td>조회 0</td>			
+						<td colspan="3" style="width: 450px; text-align: center;">작성된 글이 없습니다.</td>	
 					</tr>
 			</table>
 			<p class="ClassBoard">자료실</p>
@@ -145,15 +130,13 @@
 						<td>2019-02-22</td>
 						<td>조회 0</td>			
 					</tr>
-					<tr><td>Dd</td>
+					<tr style="border-bottom: 1px solid #ccc;">
+						<td style="width: 450px;">튜터링이 시작되었습니다. 환영합니다!</td>
 						<td>2019-02-22</td>
 						<td>조회 0</td>			
 					</tr>
-					<tr><td>dfksldmklcv</td>
-						<td>2019-02-22</td>
-						<td>조회 0</td>			
-					</tr>
-					<tr><td>다음주 수요일은 쉽니다. 공지사항을 읽어주세요.</td>
+					<tr style="border-bottom: 1px solid #ccc;">
+						<td style="width: 450px;">튜터링이 시작되었습니다. 환영합니다!</td>
 						<td>2019-02-22</td>
 						<td>조회 0</td>			
 					</tr>

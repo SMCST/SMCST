@@ -97,31 +97,33 @@
 			<p class="menu"><a href="ClassGrade.jsp">튜터링 평점조회</a></p>
 		</div>
 		<div id="contents">
-		<h1 style="text-indent: 50px; margin-top: 70px;">자료실</h1>
-		<p style="text-indent: 50px; color: gray;">1 개의 글</p>
-		<p style="text-align: right;">
+		<h1 style="text-indent: 50px; margin-top: 70px;">과제게시판</h1>
+		<fieldset style="margin-left: 50px; margin-right: 20px; margin-top: 20px; color:red;">
+			<p>2019-02-25 02시 20분 22초 기준으로 진행중인 과제가 1개 있습니다.</p>
+			<p>[ GUI 계산기 만들어오기 ]</p>
+			<p>과제 제출기간이 5일 남았습니다.</p>
+		</fieldset>
+		<p style="text-align: right; margin-right: 20px;">
 		<select size="1" id="class">
-				<option value="title">제목</option>
-				<option value="contents">내용</option>
+				<option value="title">과제제목</option>
+				<option value="contents">과제내용</option>
 				<option value="titlecontents">제목+내용</option>
-				<option value="titlecontents">작성자</option>
 				<option value="titlecontents">작성일자</option>
+				<option value="titlecontents">과제제출자</option>
 			</select>
 		<input type="text" id="ClassNotifySearch"><input type="button" value="검색" style="background: white; border: 1px solid black;">
 		</p>
 			<table style="margin-left: 50px; line-height:2; border: 1px solid lightgray;">
 					<tr style="text-align: center; background: #EEEEEE;">
-						<td>게시번호</td>
-						<td>제목</td>
-						<td>작성자</td>
+						<td>번호</td>
+						<td>과제 제목</td>
 						<td>작성일자</td>
 						<td>조회수</td>
 					</tr>
 					<tr>
 						<td style="text-align: center; width: 100px;">100</td>
-						<td style="width: 500px; text-indent: 10px;">환영합니다. 튜터링이 시작되었습니다!</td>
-						<td style="text-align: center; width: 100px;">김해님</td>
-						<td style="text-align: center; width: 100px;">2019-02-23</td>
+						<td style="width: 500px; text-indent: 10px;">GUI 계산기 만들어오기</td>
+						<td style="text-align: center; width: 100px;">2019-02-24</td>
 						<td style="text-align: center; width: 100px;">0</td>				
 					</tr>
 			</table>
@@ -134,10 +136,9 @@
 				<a href="#">5</a>
 				<input type="button" value="다음" style="background: white; border: 1px solid black;">
 			</div>
-			
-			<form action="ClassBoardWrite.jsp" method="post">
-			<p style="text-align: right;">
-				<input type="submit" value="글쓰기" style="background: white; border: 1px solid black;">
+			<form action="ClassReportAdd.jsp" method="post">
+			<p style="text-align: right; margin-right: 20px;">
+				<input type="submit" value="과제 추가" style="background: white; border: 1px solid black;">
 			</p>
 			</form>
 		</div>
