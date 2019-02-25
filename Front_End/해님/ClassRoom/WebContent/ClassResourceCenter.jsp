@@ -91,7 +91,7 @@
 			<p class="menu"><a href="ClassMeetingLog.jsp">회의록</a></p>
 			<p class="menu"><a href="ClassResourceCenter.jsp">자료실</a></p>
 			<p class="menu"><a href="ClassReport.jsp">과제 게시판</a></p>
-			<p class="menu"><a href="ClassPetition.jsp">청원 게시판</a></p>
+			<p class="menu"><a href="ClassPetition.jsp">청원</a></p>
 			<p class="menu"><a href="ClassReference.jsp">참고 메뉴</a></p>
 			<p class="menu"><a href="ClassEvaluation.jsp">튜터링 평가</a></p>
 			<p class="menu"><a href="ClassGrade.jsp">튜터링 평점조회</a></p>

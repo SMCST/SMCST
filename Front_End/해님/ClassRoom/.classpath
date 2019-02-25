@@ -8,11 +8,12 @@
 			<attribute name="owner.project.facets" value="jst.web"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/2qqns/OneDrive/바탕 화면/chartdir_java/WEB-INF/lib/ChartDirector.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre1.8.0_191">
 		<attributes>
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/2qqns/Downloads/mysql-connector-java-5.1.28-bin.jar"/>
+	<classpathentry kind="lib" path="C:/Users/2qqns/OneDrive/바탕 화면/해님/상명대/포트폴리오/캡스톤디자인 졸업 프로젝트 튜터링시스템/Front_End/해님/ClassRoom/WebContent/WEB-INF/lib/ChartDirector.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

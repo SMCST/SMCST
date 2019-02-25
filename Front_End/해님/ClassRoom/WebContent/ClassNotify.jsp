@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@ page import="java.io.PrintWriter" %>
-
+<%@ page import="board.BoardDAO" %>
+<%@ page import="board.Board" %>
+<%@ page import="java.util.ArrayList" %>
+   
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,7 +57,35 @@
 	</style>
 </head>
 <body>
-	<p style="text-align:center; ">header</p>
+	<%
+		String ID = null;
+		if (session.getAttribute("ID")!=null){
+			ID = (String) session.getAttribute("ID");
+		}
+		int pageNumber= 1; //기본 1페이지
+		if(request.getParameter("pageNumber")!=null){
+			pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+		}
+	%>
+	<nav class="navbar navbar-default">
+			<%
+				if(ID==null){
+			%>
+					<ul>
+						<li><a href="login.jsp">로그인</a></li>
+						<li><a href="insertForm.jsp">회원가입</a></li>
+					</ul>
+			<%		
+				}else{
+			%>
+			<ul>
+				<li><a href="logoutAction.jsp">로그아웃</a></li>
+			</ul>
+			<%		
+				}
+			%>
+			
+	</nav>
 	<div id="container">
 		<div id="header">
 			<table>
@@ -91,7 +122,7 @@
 			<p class="menu"><a href="ClassMeetingLog.jsp">회의록</a></p>
 			<p class="menu"><a href="ClassResourceCenter.jsp">자료실</a></p>
 			<p class="menu"><a href="ClassReport.jsp">과제 게시판</a></p>
-			<p class="menu"><a href="ClassPetition.jsp">청원 게시판</a></p>
+			<p class="menu"><a href="ClassPetition.jsp">청원</a></p>
 			<p class="menu"><a href="ClassReference.jsp">참고 메뉴</a></p>
 			<p class="menu"><a href="ClassEvaluation.jsp">튜터링 평가</a></p>
 			<p class="menu"><a href="ClassGrade.jsp">튜터링 평점조회</a></p>
@@ -116,28 +147,47 @@
 						<td>작성일자</td>
 						<td>조회수</td>
 					</tr>
+					<%
+						BoardDAO boardDAO = new BoardDAO();
+					ArrayList<Board> list = boardDAO.getClassNotify();
+					for(int i=0; i<list.size();i++){
+					%>
 					<tr>
-						<td style="text-align: center; width: 100px;">100</td>
-						<td style="width: 500px; text-indent: 10px;">환영합니다. 튜터링이 시작되었습니다!</td>
-						<td style="text-align: center; width: 100px;">김해님</td>
-						<td style="text-align: center; width: 100px;">2019-02-23</td>
-						<td style="text-align: center; width: 100px;">0</td>				
+						<td style="text-align: center; width: 100px;"><%= list.get(i).getBoardNumber() %></td>
+						<td style="width: 500px; text-indent: 10px;"><a href="ClassMeetingLogView.jsp?BoardNumber=<%= list.get(i).getBoardNumber() %>"><%=list.get(i).gettitle().replaceAll(" ", "&nbsp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>") %></a></td>
+						<td style="text-align: center; width: 100px;"><%= list.get(i).getID() %></td>
+						<td style="text-align: center; width: 100px;"><%= list.get(i).getDate().substring(0,11) %></td>
+						<td style="text-align: center; width: 100px;"><%= list.get(i).getViews() %></td>				
 					</tr>
+					<%
+					}
+					%>
 			</table>
 			<div style="text-align: center; margin-top: 50px; margin-left: 50px; margin-right: 50px;">
-				<input type="button" value="이전" style="background: white; border: 1px solid black;">
+				<%
+				if(pageNumber!=1){
+			%>
+				<a href="ClassNotify.jsp?pageNumber=<%=pageNumber-1 %>" style="background: white; border: 1px solid black;">이전</a>
+			<%		
+				}
+			%>
 				<a href="#">1</a>
 				<a href="#">2</a>
 				<a href="#">3</a>
 				<a href="#">4</a>
 				<a href="#">5</a>
-				<input type="button" value="다음" style="background: white; border: 1px solid black;">
-			</div>
-			<form action="ClassBoardWrite.jsp" method="post">
+					
+			<%	
+				if(boardDAO.nextPage(pageNumber+1)){
+			%>
+				<a href="CLassNotify.jsp?pageNumber=<%=pageNumber+1 %>" style="background: white; border: 1px solid black;">다음</a>
+			<%
+				}
+			%>
 			<p style="text-align: right;">
-				<input type="submit" value="글쓰기" style="background: white; border: 1px solid black;">
-			</p>
-			</form>
+			<a href="ClassBoardWrite.jsp" style="background: white; border: 1px solid black;">글쓰기</a>
+			</p>	
+			</div>
 		</div>
 		</div>
 		<div id="footer">

@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@ page import="board.BoardDAO" %>
+<%@ page import="board.Board" %>
+<%@ page import="java.util.ArrayList" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,7 +62,35 @@
 	</style>
 </head>
 <body>
-	<p style="text-align:center; ">header</p>
+	<%
+		String ID = null;
+		if (session.getAttribute("ID")!=null){
+			ID = (String) session.getAttribute("ID");
+		}
+		int pageNumber= 1; //기본 1페이지
+		if(request.getParameter("pageNumber")!=null){
+			pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+		}
+	%>
+	<nav class="navbar navbar-default">
+			<%
+				if(ID==null){
+			%>
+					<ul>
+						<li><a href="login.jsp">로그인</a></li>
+						<li><a href="insertForm.jsp">회원가입</a></li>
+					</ul>
+			<%		
+				}else{
+			%>
+			<ul>
+				<li><a href="logoutAction.jsp">로그아웃</a></li>
+			</ul>
+			<%		
+				}
+			%>
+			
+	</nav>
 	<div id="container">
 		<div id="header">
 			<table>
@@ -86,16 +118,16 @@
 				</address>
 			</div>
 			<h3 style="border-bottom: 1px solid #ccc;"><a href="ClassParticipant.jsp">참여자 목록</a></h3>
-				<p class="menu"><img class='SidePhoto' src="images/1.jpg"><a href="ClassParticipant.jsp#tutor">김해님(튜터자리)</a></p>
-				<p class="menu"><img class='SidePhoto' src="images/1.png"><a href="ClassParticipant.jsp#tutee1">정성옥(튜티1)</a></p>
-				<p class="menu"><img class='SidePhoto' src="images/1.png"><a href="ClassParticipant.jsp#tutee2">김창성(튜티2)</a></p>
+				<p class="menu"><img class='SidePhoto' src="images/1.jpg"><a href="ClassParticipant.jsp#tutor">김해님</a></p>
+				<p class="menu"><img class='SidePhoto' src="images/1.png"><a href="ClassParticipant.jsp#tutee1">정성옥</a></p>
+				<p class="menu"><img class='SidePhoto' src="images/1.png"><a href="ClassParticipant.jsp#tutee2">김창성</a></p>
 			<h3 style="border-bottom: 1px solid #ccc;">메뉴</h3>
 			<p class="menu"><a href="ClassRoomMain.jsp">강의실 홈</a></p>
 			<p class="menu"><a href="ClassNotify.jsp">공지사항</a></p>
 			<p class="menu"><a href="ClassMeetingLog.jsp">회의록</a></p>
 			<p class="menu"><a href="ClassResourceCenter.jsp">자료실</a></p>
 			<p class="menu"><a href="ClassReport.jsp">과제 게시판</a></p>
-			<p class="menu"><a href="ClassPetition.jsp">청원 게시판</a></p>
+			<p class="menu"><a href="ClassPetition.jsp">청원</a></p>
 			<p class="menu"><a href="ClassReference.jsp">참고 메뉴</a></p>
 			<p class="menu"><a href="ClassEvaluation.jsp">튜터링 평가</a></p>
 			<p class="menu"><a href="ClassGrade.jsp">튜터링 평점조회</a></p>
@@ -104,42 +136,53 @@
 			<p class="ClassBoard">공지사항</p>
 			<p style="text-align: right; margin-right: 80px; font-size: 18px; font-weight: bold;"><a href="ClassNotify.jsp">더보기</a></p>
 			<table style="margin-left: 50px; text-indent:80px; text-align: left; line-height:2;">
+					<%
+						BoardDAO boardDAO = new BoardDAO();
+					ArrayList<Board> list = boardDAO.getClassMainNotify();
+					for(int i=0; i<list.size();i++){
+					%>
 					<tr>
-						<td style="width: 450px;">튜터링이 시작되었습니다. 환영합니다!</td>
-						<td>2019-02-22</td>
-						<td>조회 0</td>
+						<td style="width: 450px;"><a href="ClassNotifyView.jsp?BoardNumber=<%= list.get(i).getBoardNumber() %>"><%=list.get(i).gettitle().replaceAll(" ", "&nbsp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>") %></a></td>
+						<td><%= list.get(i).getDate().substring(0,11) %></td>
+						<td>조회 <%= list.get(i).getViews() %></td>
 					</tr>
-					<tr>
-						<td style="width: 450px;">튜터링이 시작되었습니다. 환영합니다!</td>
-						<td>2019-02-22</td>
-						<td>조회 0</td>
-					</tr>
+					<%
+					}
+					%>
 			</table>
 			<p class="ClassBoard">회의록</p>
-			<p style="text-align: right; margin-right: 80px; font-size: 18px; font-weight: bold;"><a href="ClassMeetingLog.jsp">더보기</a></p>	
-				<table style="margin-left: 50px; text-indent:80px; text-align: left; line-height:2;">
-					<tr>
-						<td colspan="3" style="width: 450px; text-align: center;">작성된 글이 없습니다.</td>	
-					</tr>
-			</table>
-			<p class="ClassBoard">자료실</p>
 			<p style="text-align: right; margin-right: 80px; font-size: 18px; font-weight: bold;"><a href="ClassResourceCenter.jsp">더보기</a></p>
 			<table style="margin-left: 50px; text-indent:80px; text-align: left; line-height:2;">
-					<tr style="border-bottom: 1px solid #ccc;">
-						<td style="width: 450px;">튜터링이 시작되었습니다. 환영합니다!</td>
-						<td>2019-02-22</td>
-						<td>조회 0</td>			
+					<%
+						BoardDAO boardDAO1 = new BoardDAO();
+					ArrayList<Board> list1 = boardDAO1.getClassMainMeetingLog();
+					for(int i=0; i<list1.size();i++){
+					%>
+					<tr>
+						<td style="width: 450px;"><a href="ClassMeetingLogView.jsp?BoardNumber=<%= list1.get(i).getBoardNumber() %>"><%=list1.get(i).gettitle().replaceAll(" ", "&nbsp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>") %></a></td>
+						<td><%= list1.get(i).getDate().substring(0,11) %></td>
+						<td>조회 <%= list1.get(i).getViews() %></td>
 					</tr>
-					<tr style="border-bottom: 1px solid #ccc;">
-						<td style="width: 450px;">튜터링이 시작되었습니다. 환영합니다!</td>
-						<td>2019-02-22</td>
-						<td>조회 0</td>			
+					<%
+					}
+					%>
+			</table>
+			<p class="ClassBoard">자료실</p>
+			<p style="text-align: right; margin-right: 80px; font-size: 18px; font-weight: bold;"><a href="ClassMeetingLog.jsp">더보기</a></p>	
+				<table style="margin-left: 50px; text-indent:80px; text-align: left; line-height:2;">
+					<%
+						BoardDAO boardDAO2 = new BoardDAO();
+					ArrayList<Board> list2 = boardDAO2.getClassMainResourceCenter();
+					for(int i=0; i<list2.size();i++){
+					%>
+					<tr>
+						<td style="width: 450px;"><a href="ClassResourceCenterView.jsp?BoardNumber=<%= list2.get(i).getBoardNumber() %>"><%=list2.get(i).gettitle().replaceAll(" ", "&nbsp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>") %></a></td>
+						<td><%= list2.get(i).getDate().substring(0,11) %></td>
+						<td>조회 <%= list2.get(i).getViews() %></td>
 					</tr>
-					<tr style="border-bottom: 1px solid #ccc;">
-						<td style="width: 450px;">튜터링이 시작되었습니다. 환영합니다!</td>
-						<td>2019-02-22</td>
-						<td>조회 0</td>			
-					</tr>
+					<%
+					}
+					%>
 			</table>
 		</div>
 		</div>
