@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@ page import="java.io.PrintWriter" %>
+<%@ page import="board.BoardDAO" %>
+<%@ page import="board.Board" %>
 <%@ page import="application.ApplicationDAO" %>
 <%@ page import="application.Application" %>
 <%@ page import="tclass.Tclass" %>
@@ -51,25 +53,34 @@
     	text-indent: 20px;
     	line-height:2; 
     }
-    .ClassBoard{
-    	text-indent: 60px;
-    	font-size: 22px;
-    	font-weight: bold;
-    	margin-top: 60px;
-    }
-    	a, a:hover{
-		color: #000000;
-		text-decoration: none;
+    a, a:hover{
+	color: #000000;
+	text-decoration: none;
 	}
 	</style>
 </head>
 <body>
-
 	<%
 		String ID = null;
 		if (session.getAttribute("ID")!=null){
 			ID = (String) session.getAttribute("ID");
 		}
+		int BoardNumber = 0;
+		if (request.getParameter("BoardNumber")!=null){
+			BoardNumber = Integer.parseInt(request.getParameter("BoardNumber"));
+		}
+		if (BoardNumber ==0){
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('유효하지 않은 글입니다.')");
+			script.println("location.href='ClassNotify.jsp'");
+			script.println("</script>");
+		}
+		int code= 1;
+		if(request.getParameter("code")!=null){
+			code = Integer.parseInt(request.getParameter("code"));
+		}
+		Board board = new BoardDAO().getBoard(BoardNumber);
 	%>
 	<nav class="navbar navbar-default">
 			<%
@@ -90,7 +101,7 @@
 			%>
 			
 	</nav>
-	
+
 	<div id="container">
 				<div id="header">
 		<%
@@ -136,27 +147,90 @@
 			<p class="menu"><a href="ClassEvaluation.jsp">튜터링 평가</a></p>
 			<p class="menu"><a href="ClassGrade.jsp">튜터링 평점조회</a></p>
 		</div>
-		
 		<div id="contents">
-<%
-/*
-회원은 튜터링 강의종료일 일주일 전부터 강의종료일까지 자신이 수강한 튜터링을 한줄코멘트 작성과 함께 친절도, 성실성, 커리큘럼, 재미, 전달력을 각각 점수 매겨 평가할 수 있다.
-평가기간이 아닐때 경고알림==> 튜터링 평가 기간이 아닙니다.
-*/
-%>
-		<h1 style="text-indent: 50px; margin-top: 70px;">튜터링 소개</h1>
-		<fieldset style="margin-left: 50px; border: 1px solid lightgray;">
-			<table style="margin-top:30px; margin-left: 50px;line-height:2; ">
-				<tr>
-					<td style="text-align: center; width: 700px;">
-						<img src="images/title.jpg" height="300" width="400">
-					</td>
-				</tr>
-				<tr>
-					<td>이곳은 강의실 내에서 튜터링을 소개하는 페이지로, 튜터링 수강신청 할 때 보이는 튜터링 소개 부분의 소스를 담아야합니다.</td>
-				</tr>
+		<%
+		if(code==1){ //공지사항 코드일 경우
+		%>
+		<h1 style="text-indent: 50px; margin-top: 70px;">공지사항</h1>
+		<%
+		}
+		%>
+		<%
+		if(code==3){ //회의록 코드일 경우
+		%>
+		<h1 style="text-indent: 50px; margin-top: 70px;">회의록</h1>
+		<%
+		}
+		%>
+		<%
+		if(code==10){ //자료실 코드일 경우
+		%>
+		<h1 style="text-indent: 50px; margin-top: 70px;">자료실</h1>
+		<%
+		}
+		%>
+			<table style="margin-left: 50px; line-height:2; border: 1px solid lightgray;">
+					<tr style="text-align: center;">
+						<td style="background: #EEEEEE; width: 100px;">글 제목</td>
+						<td colspan="5" style="border-bottom: 1px solid lightgray;"><%=board.gettitle().replaceAll(" ", "&nbsp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>") %></td>
+					</tr>
+					<tr style="text-align: center;">
+						<td style="background: #EEEEEE;">작성자</td>
+						<td style="width: 200px; border-bottom: 1px solid lightgray;"><%=board.getID() %></td>
+						<td style="background: #EEEEEE; width: 100px;">작성일자</td>
+						<td style="width: 300px; border-bottom: 1px solid lightgray;"><%=board.getDate().substring(0, 4)%>년 
+							<%=board.getDate().substring(6, 7)%>월 
+							<%=board.getDate().substring(9, 10)%>일 
+							<%=board.getDate().substring(12, 13)%>시 
+							<%=board.getDate().substring(15, 16)%>분 
+							<%=board.getDate().substring(18, 19)%>초
+						</td>
+						<td style="background: #EEEEEE; width: 100px;">조회수</td>
+						<td style="width: 100px; border-bottom: 1px solid lightgray;"><%=board.getViews() %></td>
+					</tr>
+					<tr>	
+						<td style="text-align: center; background: #EEEEEE;">내용</td>
+						<td colspan="5" style="min-height: 200px; text-align:left; text-indent: 20px;"><%=board.getcontents().replaceAll(" ", "&nbsp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>") %></td>
+					</tr>
 			</table>
-			</fieldset>
+						
+			<div style="text-align: center; margin-top: 50px; margin-left: 50px; margin-right: 50px;">
+				<p style="text-align: right;">
+				
+					<%
+					if(code==1){ //공지사항 코드일 경우
+					%>
+					<a href="ClassBoard.jsp?code=1"  style="background: white; border: 1px solid black;">목록</a>
+					<%	
+					}
+					%>
+					<%
+					if(code==3){ //회의록 코드일 경우
+					%>
+					<a href="ClassBoard.jsp?code=3"  style="background: white; border: 1px solid black;">목록</a>
+					<%	
+					}
+					%>
+					<%
+					if(code==10){//자료실 코드일 경우
+					%>
+					<a href="ClassBoard.jsp?code=10"  style="background: white; border: 1px solid black;">목록</a>
+					<%	
+					}
+					%>
+					
+					<%
+						if(ID != null && ID.equals(board.getID())){
+					%>
+					<a href="ClassBoardUpdate.jsp?BoardNumber=<%=BoardNumber%>"  style="background: white; border: 1px solid black;">수정</a>
+					<a onclick="return confirm('정말로 삭제하시겠습니까?')" href="ClassBoarddeleteAction.jsp?BoardNumber=<%=BoardNumber%>"  style="background: white; border: 1px solid black;">삭제</a>
+					<%	
+					}
+					%>
+					<a href="ClassBoardWrite.jsp" style="background: white; border: 1px solid black;">글쓰기</a>
+				</p>			
+			</div>
+		</div>
 		</div>
 		<div id="footer">
 		<p style="text-align:center; ">footer</p>

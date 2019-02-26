@@ -7,9 +7,8 @@ public class Board {
 	private String title;
 	private String contents;
 	private String Date;
-	private int Code;
+	private int code;
 	private int views;
-	
 	public int getBoardNumber() {
 		return BoardNumber;
 	}
@@ -46,11 +45,11 @@ public class Board {
 	public void setDate(String date) {
 		Date = date;
 	}
-	public int getCode() {
-		return Code;
+	public int getcode() {
+		return code;
 	}
-	public void setCode(int code) {
-		Code = code;
+	public void setcode(int code) {
+		this.code = code;
 	}
 	public int getViews() {
 		return views;

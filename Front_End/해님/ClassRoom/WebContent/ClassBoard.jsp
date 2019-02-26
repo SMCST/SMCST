@@ -3,6 +3,10 @@
 <%@ page import="java.io.PrintWriter" %>
 <%@ page import="board.BoardDAO" %>
 <%@ page import="board.Board" %>
+<%@ page import="application.ApplicationDAO" %>
+<%@ page import="application.Application" %>
+<%@ page import="tclass.Tclass" %>
+<%@ page import="tclass.TclassDAO" %>
 <%@ page import="java.util.ArrayList" %>
    
 <!DOCTYPE html>
@@ -66,6 +70,10 @@
 		if(request.getParameter("pageNumber")!=null){
 			pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
 		}
+		int code= 1;
+		if(request.getParameter("code")!=null){
+			code = Integer.parseInt(request.getParameter("code"));
+		}
 	%>
 	<nav class="navbar navbar-default">
 			<%
@@ -86,41 +94,46 @@
 			%>
 			
 	</nav>
+
 	<div id="container">
-		<div id="header">
+				<div id="header">
+		<%
+				TclassDAO tclassDAO = new TclassDAO();
+				ArrayList<Tclass> tutoring = tclassDAO.getTclass();
+		%>
 			<table>
 				<tr>
 					<td rowspan="3">
 			 			<img src="images/title.jpg" style="	float: left; height: 150px; width: 240px; padding: 20px;"/>
   				 	</td>
   				 		<td valign=bottom style="text-indent:20px; font-weight: bold; font-size:20px;">
-  				 		<a href="ClassIntroduceTutoring.jsp">Tutoring Title</a></td>
+  				 		<a href="ClassIntroduceTutoring.jsp"><%= tutoring.get(0).getTutoringtitle() %></a></td>
   				 </tr>
   				 <tr>
-  				 		<td valign=middle style="text-indent:20px; font-weight: bold; font-size:20px;">Subject</td>
+  				 		<td valign=middle style="text-indent:20px; font-weight: bold; font-size:20px;"><%= tutoring.get(0).getSubject() %></td>
   				 </tr>
   				 <tr> 
-  				 		<td valign=top style="text-indent:20px; font-weight: bold; font-size:20px;"><a href="ClassParticipant.jsp#tutor">tutor name</a></td>
+  				 		<td valign=top style="text-indent:20px; font-weight: bold; font-size:20px;"><a href="ClassParticipant.jsp#tutor">튜터이름</a></td>
 				</tr>
 			</table>
 		</div>
 		<div id="sidebar">
 			<div style="text-align: center; border: none;">
 				<img src="images/1.jpg" style="	width: 100px; height: 100px; object-fit: cover; border-radius: 50%;"/>
-				<h4>Tutor, 김해님</h4>
+				<h4>Tutor, 튜터이름</h4>
 				<address>
-					<p style="color: gray;"><img src="images/mail.png" style="width:15px; height:15px;"> aosladl@naver.com</p>
+					<p style="color: gray;"><img src="images/mail.png" style="width:15px; height:15px;"><%= tutoring.get(0).getID() %></p>
 				</address>
 			</div>
 			<h3 style="border-bottom: 1px solid #ccc;"><a href="ClassParticipant.jsp">참여자 목록</a></h3>
-				<p class="menu"><img class='SidePhoto' src="images/1.jpg"><a href="ClassParticipant.jsp#tutor">김해님(튜터자리)</a></p>
-				<p class="menu"><img class='SidePhoto' src="images/1.png"><a href="ClassParticipant.jsp#tutee1">정성옥(튜티1)</a></p>
-				<p class="menu"><img class='SidePhoto' src="images/1.png"><a href="ClassParticipant.jsp#tutee2">김창성(튜티2)</a></p>
+				<p class="menu"><img class='SidePhoto' src="images/1.jpg"><a href="ClassParticipant.jsp#tutor">튜터이름</a></p>
+				<p class="menu"><img class='SidePhoto' src="images/1.png"><a href="ClassParticipant.jsp#tutee1">튜티이름</a></p>
+				<p class="menu"><img class='SidePhoto' src="images/1.png"><a href="ClassParticipant.jsp#tutee2">튜티이름</a></p>
 			<h3 style="border-bottom: 1px solid #ccc;">메뉴</h3>
 			<p class="menu"><a href="ClassRoomMain.jsp">강의실 홈</a></p>
-			<p class="menu"><a href="ClassNotify.jsp">공지사항</a></p>
-			<p class="menu"><a href="ClassMeetingLog.jsp">회의록</a></p>
-			<p class="menu"><a href="ClassResourceCenter.jsp">자료실</a></p>
+			<p class="menu"><a href="ClassBoard.jsp?code=1">공지사항</a></p>
+			<p class="menu"><a href="ClassBoard.jsp?code=3">회의록</a></p>
+			<p class="menu"><a href="ClassBoard.jsp?code=10">자료실</a></p>
 			<p class="menu"><a href="ClassReport.jsp">과제 게시판</a></p>
 			<p class="menu"><a href="ClassPetition.jsp">청원</a></p>
 			<p class="menu"><a href="ClassReference.jsp">참고 메뉴</a></p>
@@ -128,14 +141,59 @@
 			<p class="menu"><a href="ClassGrade.jsp">튜터링 평점조회</a></p>
 		</div>
 		<div id="contents">
-		<h1 style="text-indent: 50px; margin-top: 70px;">공지사항</h1>
-		<p style="text-indent: 50px; color: gray;">1 개의 글</p>
+		
+		<%
+		
+		BoardDAO boardDAO = new BoardDAO();
+		ArrayList<Board> list = null;
+		
+		if(code==1){
+		%>	
+			<h1 style="text-indent: 50px; margin-top: 70px;">공지사항</h1>
+		<%
+		list = boardDAO.getClassNotify(pageNumber);
+		
+		}
+		%>
+		<%
+		if(code==3){
+		%>	
+			<h1 style="text-indent: 50px; margin-top: 70px;">회의록</h1>
+		<%
+		list = boardDAO.getClassMeetingLog(pageNumber);
+		}
+		%>
+		<%
+		if(code==10){
+		%>	
+			<h1 style="text-indent: 50px; margin-top: 70px;">자료실</h1>
+		<%
+		list = boardDAO.getClassResourceCenter(pageNumber);
+		
+		}
+		
+		int count=0;
+		for(int i=0; i<list.size();i++){
+			count++;
+		}
+		%>
+		<p style="text-indent: 50px; color: gray;"><%=count%> 개의 글</p>
+		<%
+			if(count==0){
+		%>
+			<fieldset style="margin-left: 50px; border: 1px solid black;">
+			<p style="text-align: center; height: 50px; margin-top: 50px; color: gray;">작성된 글이 없습니다.</p>
+			</fieldset>
+		<%		
+			}else{
+		%>
 		<p style="text-align: right;">
 		<select size="1" id="class">
 				<option value="title">제목</option>
 				<option value="contents">내용</option>
 				<option value="titlecontents">제목+내용</option>
 				<option value="titlecontents">작성일자</option>
+				<%//작성일자는 작성기간 검색해 특정 기간의 글들을 조회 %>
 			</select>
 		<input type="text" id="ClassNotifySearch"><input type="button" value="검색" style="background: white; border: 1px solid black;">
 		</p>
@@ -148,13 +206,11 @@
 						<td>조회수</td>
 					</tr>
 					<%
-						BoardDAO boardDAO = new BoardDAO();
-					ArrayList<Board> list = boardDAO.getClassNotify();
 					for(int i=0; i<list.size();i++){
 					%>
 					<tr>
 						<td style="text-align: center; width: 100px;"><%= list.get(i).getBoardNumber() %></td>
-						<td style="width: 500px; text-indent: 10px;"><a href="ClassMeetingLogView.jsp?BoardNumber=<%= list.get(i).getBoardNumber() %>"><%=list.get(i).gettitle().replaceAll(" ", "&nbsp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>") %></a></td>
+						<td style="width: 500px; text-indent: 10px;"><a href="ClassBoardView.jsp?BoardNumber=<%= list.get(i).getBoardNumber() %>"><%=list.get(i).gettitle().replaceAll(" ", "&nbsp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>") %></a></td>
 						<td style="text-align: center; width: 100px;"><%= list.get(i).getID() %></td>
 						<td style="text-align: center; width: 100px;"><%= list.get(i).getDate().substring(0,11) %></td>
 						<td style="text-align: center; width: 100px;"><%= list.get(i).getViews() %></td>				
@@ -167,7 +223,7 @@
 				<%
 				if(pageNumber!=1){
 			%>
-				<a href="ClassNotify.jsp?pageNumber=<%=pageNumber-1 %>" style="background: white; border: 1px solid black;">이전</a>
+				<a href="ClassBoard.jsp?pageNumber=<%=pageNumber-1 %>" style="background: white; border: 1px solid black;">이전</a>
 			<%		
 				}
 			%>
@@ -180,10 +236,15 @@
 			<%	
 				if(boardDAO.nextPage(pageNumber+1)){
 			%>
-				<a href="CLassNotify.jsp?pageNumber=<%=pageNumber+1 %>" style="background: white; border: 1px solid black;">다음</a>
+				<a href="CLassBoard.jsp?pageNumber=<%=pageNumber+1 %>" style="background: white; border: 1px solid black;">다음</a>
 			<%
 				}
+			}
 			%>
+			
+			
+			
+			
 			<p style="text-align: right;">
 			<a href="ClassBoardWrite.jsp" style="background: white; border: 1px solid black;">글쓰기</a>
 			</p>	

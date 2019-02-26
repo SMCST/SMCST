@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@ page import="java.io.PrintWriter" %>
-
+<%@ page import="application.ApplicationDAO" %>
+<%@ page import="application.Application" %>
+<%@ page import="tclass.Tclass" %>
+<%@ page import="tclass.TclassDAO" %>
+<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,42 +58,74 @@
 	</style>
 </head>
 <body>
-	<p style="text-align:center; ">header</p>
+	<%
+		String ID = null;
+		if (session.getAttribute("ID")!=null){
+			ID = (String) session.getAttribute("ID");
+		}
+		int pageNumber= 1; //기본 1페이지
+		if(request.getParameter("pageNumber")!=null){
+			pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+		}
+	%>
+	<nav class="navbar navbar-default">
+			<%
+				if(ID==null){
+			%>
+					<ul>
+						<li><a href="login.jsp">로그인</a></li>
+						<li><a href="insertForm.jsp">회원가입</a></li>
+					</ul>
+			<%		
+				}else{
+			%>
+			<ul>
+				<li><a href="logoutAction.jsp">로그아웃</a></li>
+			</ul>
+			<%		
+				}
+			%>
+			
+	</nav>
 	<div id="container">
 		<div id="header">
+		<%
+				TclassDAO tclassDAO = new TclassDAO();
+				ArrayList<Tclass> tutoring = tclassDAO.getTclass();
+		%>
 			<table>
 				<tr>
 					<td rowspan="3">
 			 			<img src="images/title.jpg" style="	float: left; height: 150px; width: 240px; padding: 20px;"/>
   				 	</td>
   				 		<td valign=bottom style="text-indent:20px; font-weight: bold; font-size:20px;">
-  				 		<a href="ClassIntroduceTutoring.jsp">Tutoring Title</a></td>
+  				 		<a href="ClassIntroduceTutoring.jsp"><%= tutoring.get(0).getTutoringtitle() %></a></td>
   				 </tr>
   				 <tr>
-  				 		<td valign=middle style="text-indent:20px; font-weight: bold; font-size:20px;">Subject</td>
+  				 		<td valign=middle style="text-indent:20px; font-weight: bold; font-size:20px;"><%= tutoring.get(0).getSubject() %></td>
   				 </tr>
   				 <tr> 
-  				 		<td valign=top style="text-indent:20px; font-weight: bold; font-size:20px;"><a href="ClassParticipant.jsp#tutor">tutor name</a></td>
+  				 		<td valign=top style="text-indent:20px; font-weight: bold; font-size:20px;"><a href="ClassParticipant.jsp#tutor">튜터이름</a></td>
 				</tr>
 			</table>
 		</div>
 		<div id="sidebar">
 			<div style="text-align: center; border: none;">
 				<img src="images/1.jpg" style="	width: 100px; height: 100px; object-fit: cover; border-radius: 50%;"/>
-				<h4>Tutor, 김해님</h4>
+				<h4>Tutor, 튜터이름</h4>
 				<address>
-					<p style="color: gray;"><img src="images/mail.png" style="width:15px; height:15px;"> aosladl@naver.com</p>
+					<p style="color: gray;"><img src="images/mail.png" style="width:15px; height:15px;"><%= tutoring.get(0).getID() %></p>
 				</address>
 			</div>
 			<h3 style="border-bottom: 1px solid #ccc;"><a href="ClassParticipant.jsp">참여자 목록</a></h3>
-				<p class="menu"><img class='SidePhoto' src="images/1.jpg"><a href="ClassParticipant.jsp#tutor">김해님(튜터자리)</a></p>
-				<p class="menu"><img class='SidePhoto' src="images/1.png"><a href="ClassParticipant.jsp#tutee1">정성옥(튜티1)</a></p>
-				<p class="menu"><img class='SidePhoto' src="images/1.png"><a href="ClassParticipant.jsp#tutee2">김창성(튜티2)</a></p>
+				<p class="menu"><img class='SidePhoto' src="images/1.jpg"><a href="ClassParticipant.jsp#tutor">튜터이름</a></p>
+				<p class="menu"><img class='SidePhoto' src="images/1.png"><a href="ClassParticipant.jsp#tutee1">튜티이름</a></p>
+				<p class="menu"><img class='SidePhoto' src="images/1.png"><a href="ClassParticipant.jsp#tutee2">튜티이름</a></p>
 			<h3 style="border-bottom: 1px solid #ccc;">메뉴</h3>
 			<p class="menu"><a href="ClassRoomMain.jsp">강의실 홈</a></p>
-			<p class="menu"><a href="ClassNotify.jsp">공지사항</a></p>
-			<p class="menu"><a href="ClassMeetingLog.jsp">회의록</a></p>
-			<p class="menu"><a href="ClassResourceCenter.jsp">자료실</a></p>
+			<p class="menu"><a href="ClassBoard.jsp?code=1">공지사항</a></p>
+			<p class="menu"><a href="ClassBoard.jsp?code=3">회의록</a></p>
+			<p class="menu"><a href="ClassBoard.jsp?code=10">자료실</a></p>
 			<p class="menu"><a href="ClassReport.jsp">과제 게시판</a></p>
 			<p class="menu"><a href="ClassPetition.jsp">청원</a></p>
 			<p class="menu"><a href="ClassReference.jsp">참고 메뉴</a></p>

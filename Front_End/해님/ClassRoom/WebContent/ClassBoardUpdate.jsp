@@ -6,6 +6,8 @@
 <%@ page import="tclass.Tclass" %>
 <%@ page import="tclass.TclassDAO" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import ="board.Board" %>
+<%@ page import ="board.BoardDAO" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -100,37 +102,50 @@ $(function(){
 </script>
 </head>
 <body>
+
 	<%
 		String ID = null;
 		if (session.getAttribute("ID")!=null){
 			ID = (String) session.getAttribute("ID");
 		}
-		int pageNumber= 1; //기본 1페이지
-		if(request.getParameter("pageNumber")!=null){
-			pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+		if (ID == null){
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('로그인을 하세요.')");
+			script.println("location.href = 'login.jsp'");
+			script.println("</script>");
+		}
+		int BoardNumber = 0;
+		if (request.getParameter("BoardNumber") != null){
+			BoardNumber = Integer.parseInt(request.getParameter("BoardNumber"));
+		}
+		if (BoardNumber == 0 ){
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('유효하지 않는 글입니다.')");
+			script.println("location.href = 'ClassBoard.jsp'");
+			script.println("</script>");
+		}
+		Board board = new BoardDAO().getBoard(BoardNumber);
+		if (!ID.equals(board.getID())){
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('권한이 없습니다.')");
+			script.println("location.href = 'ClassBoard.jsp'");
+			script.println("</script>");
 		}
 	%>
+	
 	<nav class="navbar navbar-default">
-			<%
-				if(ID==null){
-			%>
-					<ul>
-						<li><a href="login.jsp">로그인</a></li>
-						<li><a href="insertForm.jsp">회원가입</a></li>
-					</ul>
-			<%		
-				}else{
-			%>
+			
 			<ul>
 				<li><a href="logoutAction.jsp">로그아웃</a></li>
 			</ul>
-			<%		
-				}
-			%>
-			
+		
 	</nav>
+	
 	<div id="container">
-		<div id="header">
+				<div id="header">
 		<%
 				TclassDAO tclassDAO = new TclassDAO();
 				ArrayList<Tclass> tutoring = tclassDAO.getTclass();
@@ -176,39 +191,49 @@ $(function(){
 		</div>
 		
 		<div id="contents">
-		<h1 style="text-indent: 50px; margin-top: 70px;">청원글 작성</h1>
-		<ul style="margin-left: 30px; color: red; line-height: 1.5;">
-			<li>비매너 행위를 한 튜터 혹은 튜티의 이름과 행위를 자세히 적어주십시오. 청원을 증명할 수 있는 사진파일이 있다면 첨부해주시고, 욕설·비방·노쇼 등 아래 해당되는 항목에 체크표시 해주시기 바랍니다.</li>
-			<li>허위 청원 작성 시에는 해당 사이트를 이용하는 데 있어 불이익이 있을 수 있습니다.</li>
-			<li>제출된 청원은 관리자가 확인 후 해당 튜터 혹은 튜티를 경고처리하며, 청원 처리가 완료되었음을 알려드립니다. </li>
-		</ul>
-		<form name="frm" action="#" method="post">
+		<h1 style="text-indent: 50px; margin-top: 70px;">글 수정</h1>
 		<fieldset style="margin-left: 30px; border: 1px solid lightgray;">
+		<form name="frm" action="ClassBoardUpdateAction.jsp?BoardNumber=<%=BoardNumber %>" method="post">
 			<table style="margin-top:30px; margin-left:30px;line-height:2; ">
 				<tr>
+					<td style="background: #efefef; width: 80px; text-align:center;">게시판</td>
+					<td>
+					<input type="text" name="code" style="width: 670px;">
+						<select id="ClassBoardChoice" name="stringcode">
+							<option value="notify">공지사항</option>
+							<option value="meetinglog">회의록</option>
+							<option value="resourcecenter">자료실</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
 					<td style="background: #efefef; text-align:center;">제목</td>
-					<td><input type="text" name="ClassReportTitle" style="width: 670px;"></td>
+					<td><input type="text" name="title" value="<%=board.gettitle()%>" style="width: 670px; maxlength: 50;"> </td>
 				</tr>
 				<tr>
 					<td style="background: #efefef; text-align:center;">내용</td>
-					<td><textarea cols="97" rows="30" id="ir1"></textarea></td>
+					<td><textarea cols="97" rows="30" id="ir1" name="contents"><%=board.getcontents() %></textarea></td>
 				</tr>
 				<tr>
-					<td style="background: #efefef; text-align:center;">청원분류</td>
-					<td><label><input type="radio" name="row">욕설</label>
-						<label><input type="radio" name="row">비방</label>
-						<label><input type="radio" name="row">사기</label>
-						<label><input type="radio" name="row">협박</label>
-						<label><input type="radio" name="high">노쇼</label>
-					</td>
+					<td style="background: #efefef; text-align:center;">첨부파일</td>
+					<td><input type="file"></td>
+				</tr>
+				<tr>
+					<td style="background: #efefef; text-align:center;">첨부파일</td>
+					<td><input type="file"></td>
+				</tr>
+				<tr>
+					<td style="background: #efefef; text-align:center;">첨부파일</td>
+					<td><input type="file"></td>
 				</tr>
 			</table>
 			<p style="text-align: right; margin-right: 50px;">
-				<input type="button" value="제출" id="save" style="background: white; border: 1px solid black;">
+				<input type="submit" value="작성" id="save" style="background: white; border: 1px solid black;">
 				<input type="button" value="취소" style="background: white; border: 1px solid black;">
 			</p>
+			</form>
 		</fieldset>
-		</form>
+		
 		</div>
 		</div>
 		<div id="footer">
