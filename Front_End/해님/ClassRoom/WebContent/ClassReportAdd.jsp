@@ -147,7 +147,7 @@
 						<label><input type="time" value="00:00" id="timestart" name="timestart" style="width: 100px;">부터 ~ </label>
 					</td>
 					<td><label><input type="date" id="dateend" name="dateend" style="width: 120px;"></label>
-						<label><input type="time" value="00:00" id="timeend" name="dateend" style="width: 100px;">까지</label>
+						<label><input type="time" value="00:00" id="timeend" name="timeend" style="width: 100px;">까지</label>
 					</td>
 				</tr>
 				<tr>
@@ -160,8 +160,8 @@
 				</tr>
 			</table>
 			<p style="text-align: right; margin-right: 70px;">
-				<input type="button" value="과제생성" style="background: white; border: 1px solid black;"></a>
-				<input type="button" value="다시쓰기" style="background: white; border: 1px solid black;">
+				<input type="submit" value="등록" style="background: white; border: 1px solid black;"></a>
+				<input type="button" value="취소"  onClick="history.go(-1)" style="background: white; border: 1px solid black;" >
 			</p>
 			</form>
 		</fieldset>

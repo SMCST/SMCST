@@ -181,7 +181,7 @@ public class BoardDAO {
 		return list;
 	}
 	public ArrayList<Board> getClassReport(int pageNumber){
-		String SQL = "SELECT BoardNumber,Title,ID, Date,views,code FROM BOARD WHERE code=2 and academicnumber=2 and BoardNumber < ? ORDER BY BoardNumber DESC LIMIT 10";
+		String SQL = "SELECT BoardNumber,Title,ID, Date,views,code FROM BOARD WHERE code=2 and BoardNumber < ? ORDER BY BoardNumber DESC LIMIT 10";
 		ArrayList<Board> list = new ArrayList<Board>();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);

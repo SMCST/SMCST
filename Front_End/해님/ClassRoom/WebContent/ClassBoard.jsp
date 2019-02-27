@@ -263,7 +263,7 @@
 			%>
 			
 			<p style="text-align: right;">
-			<a href="ClassBoardWrite.jsp" style="background: white; border: 1px solid black;">글쓰기</a>
+			<a href="ClassBoardWrite.jsp?code=<%=code %>" style="background: white; border: 1px solid black;">글쓰기</a>
 			</p>	
 			</div>
 		</div>

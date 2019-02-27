@@ -204,21 +204,37 @@ $(function(){
 		</div>
 		
 		<div id="contents">
-		<h1 style="text-indent: 50px; margin-top: 70px;">글 수정</h1>
+		<%
+		if(code==1){
+		%>
+		<h1 style="text-indent: 50px; margin-top: 70px;">공지사항 수정</h1>
+		<%	
+		}
+		%>
+		<%
+		if(code==3){
+		%>
+		<h1 style="text-indent: 50px; margin-top: 70px;">회의록 수정</h1>
+		<%	
+		}
+		%>
+		<%
+		if(code==10){
+		%>
+		<h1 style="text-indent: 50px; margin-top: 70px;">자료 수정</h1>
+		<%	
+		}
+		%>
+		<%
+		if(code==2){
+		%>
+		<h1 style="text-indent: 50px; margin-top: 70px;">과제 수정</h1>
+		<%	
+		}
+		%>
 		<fieldset style="margin-left: 30px; border: 1px solid lightgray;">
 		<form name="frm" action="ClassBoardUpdateAction.jsp?code=<%=code%>&BoardNumber=<%=BoardNumber %>" method="post">
 			<table style="margin-top:30px; margin-left:30px;line-height:2; ">
-				<tr>
-					<td style="background: #efefef; width: 80px; text-align:center;">게시판</td>
-					<td>
-					<input type="text" name="code" style="width: 670px;">
-						<select id="ClassBoardChoice" name="stringcode">
-							<option value="notify">공지사항</option>
-							<option value="meetinglog">회의록</option>
-							<option value="resourcecenter">자료실</option>
-						</select>
-					</td>
-				</tr>
 				<tr>
 					<td style="background: #efefef; text-align:center;">제목</td>
 					<td><input type="text" name="title" value="<%=board.gettitle()%>" style="width: 670px; maxlength: 50;"> </td>

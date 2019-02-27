@@ -16,6 +16,15 @@
 <body>
 
 <%	
+	String title = request.getParameter("title");
+	String contents = request.getParameter("contents");
+	String datestart = request.getParameter("datestart");
+	String timestart = request.getParameter("timestart");
+	String dateend = request.getParameter("dateend");
+	String timeend = request.getParameter("timeend");
+	
+	
+	
 	String ID = null;
 	if(session.getAttribute("ID")!=null){
 		ID = (String)session.getAttribute("ID");
@@ -27,7 +36,8 @@
 		script.println("location.href='login.jsp'");
 		script.println("</script>");
 	}else{
-		if(board.gettitle()==null || board.getcontents()==null){
+		if(title.equals("")|| contents.equals("")|| datestart.equals("")|| timestart.equals("")
+				|| dateend.equals("") || timeend.equals("")){
 					PrintWriter script = response.getWriter();
 					script.println("<script>");
 					script.println("alert('입력이 안 된 사항이 있습니다.')");
@@ -36,17 +46,17 @@
 				}else{
 					
 					BoardDAO boardDAO = new BoardDAO();
-					int result = boardDAO.write(board.getcode(), board.gettitle(), ID, board.getcontents());
+					int result = boardDAO.write(2, board.gettitle(), ID, board.getcontents());
 					if(result == -1){
 						PrintWriter script = response.getWriter();
 						script.println("<script>");
-						script.println("alert('글쓰기에 실패했습니다.')");
+						script.println("alert('과제추가에 실패했습니다.')");
 						script.println("history.back()");
 						script.println("</script>");
 					}else{
 						PrintWriter script = response.getWriter();
 						script.println("<script>");
-						script.println("location.href = 'ClassReport.jsp'");
+						script.println("location.href = 'ClassReportView.jsp'");
 						script.println("</script>");						
 					}
 				}

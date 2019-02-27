@@ -15,18 +15,12 @@
 
 <%	
 
-	String contents = request.getParameter("contents");
+	String brcontents = request.getParameter("brcontents");
+	int code = Integer.parseInt(request.getParameter("code"));
 	
 	int BoardNumber = 0;
 	if (request.getParameter("BoardNumber")!=null){
 		BoardNumber = Integer.parseInt(request.getParameter("BoardNumber"));
-	}
-	if (BoardNumber ==0){
-		PrintWriter script = response.getWriter();
-		script.println("<script>");
-		script.println("alert('유효하지 않은 글입니다.')");
-		script.println("location.href='ClassBoard.jsp?code='code");
-		script.println("</script>");
 	}
 	
 	String ID = null;
@@ -46,7 +40,7 @@
 	
 					BoardreplyDAO boardreplyDAO = new BoardreplyDAO();
 					
-					int result = boardreplyDAO.write(ID, contents, BoardNumber);
+					int result = boardreplyDAO.write(ID, brcontents, BoardNumber);
 					if(result == -1){
 						PrintWriter script = response.getWriter();
 						script.println("<script>");
@@ -55,10 +49,11 @@
 						script.println("</script>");
 					}else{
 						PrintWriter script = response.getWriter();
-						script.println("<script>");
-						script.println("alert('댓글을 작성함.')");
-						script.println("</script>");
-						
+						%>
+						<script>
+						location.href = 'ClassBoardView.jsp?code=<%=code%>&BoardNumber=<%=BoardNumber%>';
+						</script>
+					<%
 					}
 				}
 

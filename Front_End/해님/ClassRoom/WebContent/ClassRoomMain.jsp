@@ -127,8 +127,15 @@
 			</div>
 			<h3 style="border-bottom: 1px solid #ccc;"><a href="ClassParticipant.jsp">참여자 목록</a></h3>
 				<p class="menu"><img class='SidePhoto' src="images/1.jpg"><a href="ClassParticipant.jsp#tutor">튜터이름</a></p>
-				<p class="menu"><img class='SidePhoto' src="images/1.png"><a href="ClassParticipant.jsp#tutee1">튜티이름</a></p>
-				<p class="menu"><img class='SidePhoto' src="images/1.png"><a href="ClassParticipant.jsp#tutee2">튜티이름</a></p>
+				<%
+				ApplicationDAO applicationDAO = new ApplicationDAO();
+				ArrayList<Application> tuteelist = applicationDAO.getParticipant();
+				for(int i=0; i<tuteelist.size(); i++){
+				%>
+					<p class="menu"><img class='SidePhoto' src="images/1.png"><a href="ClassParticipant.jsp#tutee<%=i%>"><%=tuteelist.get(i).getID() %></a></p>
+				<%
+				}
+				%>
 			<h3 style="border-bottom: 1px solid #ccc;">메뉴</h3>
 			<p class="menu"><a href="ClassRoomMain.jsp">강의실 홈</a></p>
 			<p class="menu"><a href="ClassBoard.jsp?code=1">공지사항</a></p>
@@ -169,7 +176,7 @@
 						for(int i=0; i<list.size();i++){
 					%>
 					<tr>
-						<td style="width: 450px;"><a href="ClassBoardView.jsp?BoardNumber=<%= list.get(i).getBoardNumber() %>"><%=list.get(i).gettitle().replaceAll(" ", "&nbsp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>") %></a></td>
+						<td style="width: 450px;"><a href="ClassBoardView.jsp?code=<%=list.get(i).getcode() %>&BoardNumber=<%= list.get(i).getBoardNumber() %>"><%=list.get(i).gettitle().replaceAll(" ", "&nbsp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>") %></a></td>
 						<td><%= list.get(i).getDate().substring(0,11) %></td>
 						<td>조회 <%= list.get(i).getViews() %></td>
 					</tr>

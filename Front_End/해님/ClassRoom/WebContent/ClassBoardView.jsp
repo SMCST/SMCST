@@ -230,8 +230,8 @@
 			}
 			%>	
 			</table>
-			<form action="ClassBoardReply.jsp" method="post">
 			
+			<form action="ClassBoardReply.jsp?code=<%=code %>&BoardNumber=<%=BoardNumber%>" method="post">
 			<table style="margin-top:10px;">
 				<tr>
 					<td colspan="2"><input type="text" name="brcontents" style="width: 800px; height: 150px;"></td>
@@ -239,7 +239,7 @@
 			</table>		
 			<div style="text-align: center; margin-top: 10px; margin-left: 50px; margin-right: 50px;">
 				<p style="text-align: right;">
-					<a href="ClassBoardView.jsp?code=1&BoardNumber=<%=BoardNumber%>"><input type="submit" value="댓글작성" id="save" style="background: white; border: 1px solid black;"></a>
+					<input type="submit" value="댓글작성" id="save" style="background: white; border: 1px solid black;">
 				</p>
 			</div>
 			</form>
@@ -257,7 +257,8 @@
 						}
 					%>
 					<a href="ClassBoard.jsp?code=1"  style="background: white; border: 1px solid black;">목록</a>
-				
+					<a href="ClassBoardWrite.jsp?code=<%=code %>" style="background: white; border: 1px solid black;">글쓰기</a>
+					
 					<%	
 					}
 					%>
@@ -272,6 +273,7 @@
 						}
 					%>
 					<a href="ClassBoard.jsp?code=3"  style="background: white; border: 1px solid black;">목록</a>
+					<a href="ClassBoardWrite.jsp?code=<%=code %>" style="background: white; border: 1px solid black;">글쓰기</a>
 				
 					<%	
 					}
@@ -287,10 +289,11 @@
 						}
 					%>
 					<a href="ClassBoard.jsp?code=10"  style="background: white; border: 1px solid black;">목록</a>
+					<a href="ClassBoardWrite.jsp?code=<%=code %>" style="background: white; border: 1px solid black;">글쓰기</a>
+					
 					<%	
 					}
 					%>
-					<a href="ClassBoardWrite.jsp" style="background: white; border: 1px solid black;">글쓰기</a>
 				
 				</p>			
 			</div>

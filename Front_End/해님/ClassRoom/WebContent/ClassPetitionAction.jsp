@@ -22,7 +22,6 @@
 	String text = request.getParameter("text");
 	String obj = request.getParameter("obj");
 	
-	System.out.println(one);
 
 	String ID = null;
 	if(session.getAttribute("ID")!=null){

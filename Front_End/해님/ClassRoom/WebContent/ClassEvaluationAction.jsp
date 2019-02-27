@@ -51,7 +51,7 @@
 			if(result == -1){
 						PrintWriter script = response.getWriter();
 						script.println("<script>");
-						script.println("alert('튜터링평가에 실패했습니다.')");
+						script.println("alert('이미 튜터링평가를 하셨습니다.')");
 						script.println("history.back()");
 						script.println("</script>");
 					}else{

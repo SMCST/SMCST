@@ -174,21 +174,43 @@ $(function(){
 		</div>
 		
 		<div id="contents">
-		<h1 style="text-indent: 50px; margin-top: 70px;">글 작성</h1>
+		<%
+			int code = Integer.parseInt(request.getParameter("code"));
+		
+		if (code==1){
+		%>
+			<h1 style="text-indent: 50px; margin-top: 70px;">공지사항 작성</h1>	
+		<%
+		}
+		%>
+		
+		<%
+		if (code==3){
+		%>
+			<h1 style="text-indent: 50px; margin-top: 70px;">회의록 작성</h1>	
+		<%
+		}
+		%>
+		
+		<%
+		if (code==10){
+		%>
+			<h1 style="text-indent: 50px; margin-top: 70px;">자료 작성</h1>	
+		<%
+		}
+		%>
+		
+		<%
+		if (code==2){
+		%>
+			<h1 style="text-indent: 50px; margin-top: 70px;">과제 제출</h1>	
+		<%
+		}
+		%>
+		
 		<fieldset style="margin-left: 30px; border: 1px solid lightgray;">
-		<form name="frm" action="ClassBoardWriteAction.jsp" method="post">
+		<form name="frm" action="ClassBoardWriteAction.jsp?code=<%=code%>" method="post">
 			<table style="margin-top:30px; margin-left:30px;line-height:2; ">
-				<tr>
-					<td style="background: #efefef; width: 80px; text-align:center;">게시판</td>
-					<td>
-						<select id="ClassBoardChoice" name="stringcode">
-							<option name="code" value="1">공지사항</option>
-							<option name="code" value="3">회의록</option>
-							<option name="code" value="10">자료실</option>
-							<option name="code" value="2">과제제출</option>
-						</select>
-					</td>
-				</tr>
 				<tr>
 					<td style="background: #efefef; text-align:center;">제목</td>
 					<td><input type="text" name="title" style="width: 670px; maxlength: 50;"></td>

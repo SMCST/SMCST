@@ -61,6 +61,7 @@
 </head>
 <body>
 	<%
+		
 		String ID = null;
 		if (session.getAttribute("ID")!=null){
 			ID = (String) session.getAttribute("ID");
@@ -176,20 +177,20 @@
 			</table>
 			<fieldset style="margin-left: 40px; margin-top: 30px; border:1px solid lightgray;">
 			<table style=" line-height:2; border: 1px solid lightgray;">
-					<tr style="text-align: center;">
-						<td style="background: #EEEEEE; width: 100px;">미제출자</td>
-						<td colspan="4" style="border-bottom: 1px solid lightgray;"></td>
+					<tr>
+						<td style=" text-align: center; background: #EEEEEE; width: 100px;">미제출자</td>
+						<td colspan="4" style="border-bottom: 1px solid lightgray; text-indent:30px;">김동규</td>
 					</tr>
 					<tr style="text-align: center;">
 						<td rowspan="2" style="background: #EEEEEE; width: 100px;">제출자</td>
 						<td style="border-bottom: 1px solid lightgray; width: 110px;">김창성</td>
-						<td style="border-bottom: 1px solid lightgray; width: 400px;">과제제목</td>
+						<td style="border-bottom: 1px solid lightgray; width: 400px;">과제내용</td>
 						<td style="border-bottom: 1px solid lightgray; width: 100px;">2019-02-27</td>
 						<td style="border-bottom: 1px solid lightgray; width: 100px;">조회 0</td>
 					</tr>
 					<tr style="text-align: center;">
 						<td style="border-bottom: 1px solid lightgray; width: 110px;">정성옥</td>
-						<td style="border-bottom: 1px solid lightgray; width: 400px;">과제제목</td>
+						<td style="border-bottom: 1px solid lightgray; width: 400px;">과제내용</td>
 						<td style="border-bottom: 1px solid lightgray; width: 100px;">2019-02-27</td>
 						<td style="border-bottom: 1px solid lightgray; width: 100px;">조회 0</td>
 					</tr>
