@@ -182,29 +182,31 @@ $(function(){
 			<li>허위 청원 작성 시에는 해당 사이트를 이용하는 데 있어 불이익이 있을 수 있습니다.</li>
 			<li>제출된 청원은 관리자가 확인 후 해당 튜터 혹은 튜티를 경고처리하며, 청원 처리가 완료되었음을 알려드립니다. </li>
 		</ul>
-		<form name="frm" action="#" method="post">
+		<form name="frm" action="ClassPetitionAction.jsp" method="post">
 		<fieldset style="margin-left: 30px; border: 1px solid lightgray;">
 			<table style="margin-top:30px; margin-left:30px;line-height:2; ">
 				<tr>
 					<td style="background: #efefef; text-align:center;">제목</td>
-					<td><input type="text" name="ClassReportTitle" style="width: 670px;"></td>
+					<td colspan="3"><input type="text" name="title" style="width: 670px;"></td>
+				</tr>
+				<tr>
+					<td style="background: #efefef; text-align:center;">신고 대상 ID</td>
+					<td style="width: 250px;"><input type="text"  name="obj" style="width: 200px;"></td>
+					<td style="background: #efefef; text-align:center;">청원분류</td>
+					<td><label><input type="radio" name="alert" value="1">욕설</label>
+						<label><input type="radio" name="alert" value="1">비방</label>
+						<label><input type="radio" name="alert" value="1">사기</label>
+						<label><input type="radio" name="alert" value="3">협박</label>
+						<label><input type="radio" name="alert" value="3">노쇼</label>
+					</td>
 				</tr>
 				<tr>
 					<td style="background: #efefef; text-align:center;">내용</td>
-					<td><textarea cols="97" rows="30" id="ir1"></textarea></td>
-				</tr>
-				<tr>
-					<td style="background: #efefef; text-align:center;">청원분류</td>
-					<td><label><input type="radio" name="row">욕설</label>
-						<label><input type="radio" name="row">비방</label>
-						<label><input type="radio" name="row">사기</label>
-						<label><input type="radio" name="row">협박</label>
-						<label><input type="radio" name="high">노쇼</label>
-					</td>
+					<td colspan="3"><textarea cols="97" rows="30" id="ir1" name="text"></textarea></td>
 				</tr>
 			</table>
 			<p style="text-align: right; margin-right: 50px;">
-				<input type="button" value="제출" id="save" style="background: white; border: 1px solid black;">
+				<input type="submit" value="제출" id="save" style="background: white; border: 1px solid black;">
 				<input type="button" value="취소" style="background: white; border: 1px solid black;">
 			</p>
 		</fieldset>

@@ -239,7 +239,7 @@
 			</table>		
 			<div style="text-align: center; margin-top: 10px; margin-left: 50px; margin-right: 50px;">
 				<p style="text-align: right;">
-					<input type="submit" value="´ñ±ÛÀÛ¼º" id="save" style="background: white; border: 1px solid black;">
+					<a href="ClassBoardView.jsp?code=1&BoardNumber=<%=BoardNumber%>"><input type="submit" value="´ñ±ÛÀÛ¼º" id="save" style="background: white; border: 1px solid black;"></a>
 				</p>
 			</div>
 			</form>

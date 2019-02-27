@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@ page import="java.io.PrintWriter" %>
+<%@ page import="board.BoardDAO" %>
+<%@ page import="board.Board" %>
 <%@ page import="application.ApplicationDAO" %>
 <%@ page import="application.Application" %>
 <%@ page import="tclass.Tclass" %>
 <%@ page import="tclass.TclassDAO" %>
-<%@ page import="education.Education" %>
-<%@ page import="education.EducationDAO" %>
-
 <%@ page import="java.util.ArrayList" %>
+   
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,6 +70,10 @@
 		if(request.getParameter("pageNumber")!=null){
 			pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
 		}
+		int code= 1;
+		if(request.getParameter("code")!=null){
+			code = Integer.parseInt(request.getParameter("code"));
+		}
 	%>
 	<nav class="navbar navbar-default">
 			<%
@@ -90,8 +94,9 @@
 			%>
 			
 	</nav>
+
 	<div id="container">
-		<div id="header">
+				<div id="header">
 		<%
 				TclassDAO tclassDAO = new TclassDAO();
 				ArrayList<Tclass> tutoring = tclassDAO.getTclass();
@@ -135,34 +140,34 @@
 			<p class="menu"><a href="ClassEvaluation.jsp">튜터링 평가</a></p>
 			<p class="menu"><a href="ClassGrade.jsp">튜터링 평점조회</a></p>
 		</div>
-		
 		<div id="contents">
-		<h1 style="text-indent: 50px; margin-top: 70px;">참고 메뉴</h1>
-		<%
-				EducationDAO educationDAO = new EducationDAO();
-				ArrayList<Education> education = educationDAO.getEducation();
-				int educationCount=0;
-				for (int i=0; i<education.size(); i++){
-					educationCount++;
-				}
-		%>
-		<p style="text-indent: 50px; color: gray;"><%=educationCount%> 개의 컨텐츠</p>
+		
+			<h1 style="text-indent: 50px; margin-top: 70px;">참고 메뉴</h1>
+		
+		<p style="text-indent: 50px; color: gray;">0 개의 글</p>
+		
 		<p style="text-align: right;">
+		<select size="1" id="class">
+				<option value="title">제목</option>
+				<option value="contents">내용</option>
+				<option value="titlecontents">제목+내용</option>
+				<option value="titlecontents">작성일자</option>
+				<%//작성일자는 작성기간 검색해 특정 기간의 글들을 조회 %>
+			</select>
 		<input type="text" id="ClassNotifySearch"><input type="button" value="검색" style="background: white; border: 1px solid black;">
 		</p>
 			<div style="text-align: center; margin-top: 50px; margin-left: 50px; margin-right: 50px;">
-				<input type="button" value="이전" style="background: white; border: 1px solid black;">
+				
 				<a href="#">1</a>
 				<a href="#">2</a>
 				<a href="#">3</a>
 				<a href="#">4</a>
 				<a href="#">5</a>
-				<input type="button" value="다음" style="background: white; border: 1px solid black;">
+						
 			</div>
 		</div>
 		</div>
 		<div id="footer">
-		<p style="text-align:center; ">footer</p>
 	</div>
 </body>
 </html>

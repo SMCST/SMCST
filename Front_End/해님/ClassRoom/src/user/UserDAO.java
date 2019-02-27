@@ -45,17 +45,29 @@ public class UserDAO {
 		}
 		return -2; //db 오류
 	}
-	public int insert(User user) {
-		String SQL = "insert into MEMBER values (?,?,?,?,default,default,default,?)";
+	public int update(String obj, int alert) {
+		String SQL = "UPDATE MEMBER SET alert= ? WHERE ID =?";
 		try {
-			pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1, user.getID());
-			pstmt.setString(2, user.getName());
-			pstmt.setString(3, user.getPassword());
-			pstmt.setString(4, user.getPhone());
-			pstmt.setString(5, user.getBirth());
-			return pstmt.executeUpdate();
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			
+			pstmt.setInt(1, getAlert(obj)+alert);
+			pstmt.setString(2, obj);
+			return pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1; //db 오류
+	}
+	public int getAlert(String obj) {
+		String SQL = "SELECT alert FROM member where ID= ?";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, obj);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return rs.getInt(1);
+			}
+			return 1; 
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

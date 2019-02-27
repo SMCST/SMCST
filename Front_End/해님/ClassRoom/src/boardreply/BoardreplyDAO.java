@@ -75,12 +75,12 @@ public class BoardreplyDAO {
 		}
 		return list;
 	}
-	public int write(int BRNumber, String ID, String BRContents, String BoardNumber) {
-		String SQL = "INSERT INTO BOARDREPLY VALUES (?,?,?,?,?,?)";
+	public int write(String ID, String BRContents, int BoardNumber) {
+		String SQL = "INSERT INTO BOARDREPLY VALUES (?,?,?,?,?)";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, getNext()); 
-			pstmt.setString(2, BoardNumber); 
+			pstmt.setInt(2, BoardNumber); 
 			pstmt.setString(3, ID);
 			pstmt.setString(4, BRContents);
 			pstmt.setString(5, getDate());
