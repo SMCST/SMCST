@@ -135,23 +135,24 @@
 		<div id="contents">
 		<h1 style="text-indent: 50px; margin-top: 70px;">과제 생성</h1>
 		<fieldset style="margin-left: 50px; border: 1px solid lightgray;">
+			<form action="ClassReportAddAction.jsp" method="post">
 			<table style="margin-top:30px; margin-left: 50px;line-height:2; ">
 				<tr>
 					<td style="background: #efefef; width: 110px; text-align:center;">과제 제목</td>
-					<td colspan="3"><input type="text" name="ClassReportTitle" style="width: 560px;"></td>
+					<td colspan="3"><input type="text" name="title" style="width: 550px;"></td>
 				</tr>
 				<tr>
 					<td style="background: #efefef; width: 130px; text-align:center;">과제 기간</td>
-					<td><label><input type="date" id="ClassReportDateStart" style="width: 120px;"></label>
-						<label><input type="time" value="00:00" id="ClassReportTimeStart" style="width: 100px;">부터 ~ </label>
+					<td><label><input type="date" id="datestart" name="datestart" style="width: 120px;"></label>
+						<label><input type="time" value="00:00" id="timestart" name="timestart" style="width: 100px;">부터 ~ </label>
 					</td>
-					<td><label><input type="date" id="ClassReportDateEnd" style="width: 120px;"></label>
-						<label><input type="time" value="00:00" id="ClassReportTimeEnd" style="width: 100px;">까지</label>
+					<td><label><input type="date" id="dateend" name="dateend" style="width: 120px;"></label>
+						<label><input type="time" value="00:00" id="timeend" name="dateend" style="width: 100px;">까지</label>
 					</td>
 				</tr>
 				<tr>
 					<td style="background: #efefef; width: 130px; text-align:center;">과제내용</td>
-					<td colspan="3"><textarea cols="80" rows="20" id="ClassReportContent"></textarea></td>
+					<td colspan="3"><input type="text" name="contents" style="width: 550px; height: 150px;"></td>
 				</tr>
 				<tr>
 					<td style="background: #efefef; width: 130px; text-align:center;">첨부파일</td>
@@ -159,9 +160,10 @@
 				</tr>
 			</table>
 			<p style="text-align: right; margin-right: 70px;">
-				<input type="button" value="과제생성" style="background: white; border: 1px solid black;">
+				<input type="button" value="과제생성" style="background: white; border: 1px solid black;"></a>
 				<input type="button" value="다시쓰기" style="background: white; border: 1px solid black;">
 			</p>
+			</form>
 		</fieldset>
 		</div>
 		<div id="footer">

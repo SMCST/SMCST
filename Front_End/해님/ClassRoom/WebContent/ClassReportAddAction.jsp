@@ -4,7 +4,6 @@
 <%@ page import ="java.io.PrintWriter" %>
 <% request.setCharacterEncoding("UTF-8"); %>
 <jsp:useBean id="board" class="board.Board" scope="page" />
-<jsp:setProperty name="board" property="code"/>
 <jsp:setProperty name="board" property="title"/>
 <jsp:setProperty name="board" property="contents"/>
 
@@ -46,26 +45,13 @@
 						script.println("</script>");
 					}else{
 						PrintWriter script = response.getWriter();
-						if (board.getcode()==1){   //공지사항
-							script.println("<script>");
-							script.println("location.href = 'ClassBoard.jsp?code=1'");
-							script.println("</script>");						
-						}
-						if (board.getcode()==3){   //회의록
-							script.println("<script>");
-							script.println("location.href = 'ClassBoard.jsp?code=3'");
-							script.println("</script>");						
-						}
-						if (board.getcode()==10){   //자료실
-							script.println("<script>");
-							script.println("location.href = 'ClassBoard.jsp?code=10'");
-							script.println("</script>");						
-						}
-						
+						script.println("<script>");
+						script.println("location.href = 'ClassReport.jsp'");
+						script.println("</script>");						
 					}
 				}
-				
-	}
+			}
+
 %>
 </body>
 </html>

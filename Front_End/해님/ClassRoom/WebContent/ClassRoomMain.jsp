@@ -200,7 +200,7 @@
 						for(int i=0; i<list1.size();i++){
 					%>
 					<tr>
-						<td style="width: 450px;"><a href="ClassBoardView.jsp?BoardNumber=<%= list1.get(i).getBoardNumber() %>"><%=list1.get(i).gettitle().replaceAll(" ", "&nbsp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>") %></a></td>
+						<td style="width: 450px;"><a href="ClassBoardView.jsp?code=3&BoardNumber=<%= list1.get(i).getBoardNumber() %>"><%=list1.get(i).gettitle().replaceAll(" ", "&nbsp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>") %></a></td>
 						<td><%= list1.get(i).getDate().substring(0,11) %></td>
 						<td>조회 <%= list1.get(i).getViews() %></td>
 					</tr>
@@ -231,7 +231,7 @@
 						for(int i=0; i<list2.size();i++){
 					%>
 					<tr>
-						<td style="width: 450px;"><a href="ClassBoardView.jsp?BoardNumber=<%= list2.get(i).getBoardNumber() %>"><%=list2.get(i).gettitle().replaceAll(" ", "&nbsp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>") %></a></td>
+						<td style="width: 450px;"><a href="ClassBoardView.jsp?code=10&BoardNumber=<%= list2.get(i).getBoardNumber() %>"><%=list2.get(i).gettitle().replaceAll(" ", "&nbsp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>") %></a></td>
 						<td><%= list2.get(i).getDate().substring(0,11) %></td>
 						<td>조회 <%= list2.get(i).getViews() %></td>
 					</tr>

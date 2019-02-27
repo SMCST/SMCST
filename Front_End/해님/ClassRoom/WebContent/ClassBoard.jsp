@@ -210,7 +210,27 @@
 					%>
 					<tr>
 						<td style="text-align: center; width: 100px;"><%= list.get(i).getBoardNumber() %></td>
-						<td style="width: 500px; text-indent: 10px;"><a href="ClassBoardView.jsp?BoardNumber=<%= list.get(i).getBoardNumber() %>"><%=list.get(i).gettitle().replaceAll(" ", "&nbsp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>") %></a></td>
+					<%
+					if(code==1){
+					%>
+						<td style="width: 500px; text-indent: 10px;"><a href="ClassBoardView.jsp?code=1&BoardNumber=<%= list.get(i).getBoardNumber() %>"><%=list.get(i).gettitle().replaceAll(" ", "&nbsp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>") %></a></td>
+					<%	
+					}
+					%>
+					<%
+					if(code==3){
+					%>
+						<td style="width: 500px; text-indent: 10px;"><a href="ClassBoardView.jsp?code=3&BoardNumber=<%= list.get(i).getBoardNumber() %>"><%=list.get(i).gettitle().replaceAll(" ", "&nbsp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>") %></a></td>
+					<%	
+					}
+					%>
+					<%
+					if(code==10){
+					%>
+						<td style="width: 500px; text-indent: 10px;"><a href="ClassBoardView.jsp?code=10&BoardNumber=<%= list.get(i).getBoardNumber() %>"><%=list.get(i).gettitle().replaceAll(" ", "&nbsp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>") %></a></td>
+					<%	
+					}
+					%>
 						<td style="text-align: center; width: 100px;"><%= list.get(i).getID() %></td>
 						<td style="text-align: center; width: 100px;"><%= list.get(i).getDate().substring(0,11) %></td>
 						<td style="text-align: center; width: 100px;"><%= list.get(i).getViews() %></td>				
@@ -241,9 +261,6 @@
 				}
 			}
 			%>
-			
-			
-			
 			
 			<p style="text-align: right;">
 			<a href="ClassBoardWrite.jsp" style="background: white; border: 1px solid black;">±Û¾²±â</a>

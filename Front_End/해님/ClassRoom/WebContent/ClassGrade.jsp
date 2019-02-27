@@ -5,55 +5,10 @@
 <%@ page import="application.Application" %>
 <%@ page import="tclass.Tclass" %>
 <%@ page import="tclass.TclassDAO" %>
+<%@ page import="evaluation.Evaluation" %>
+<%@ page import="evaluation.EvaluationDAO" %>
 <%@ page import="java.util.ArrayList" %>
 <%@page import="ChartDirector.*" %>
-<%
-// The data for the chart
-
-int sincerity=75;
-int kind=80;
-int curriculum=65;
-int interest=100;
-int delivery=83;
-
-double[] data = {sincerity, kind, curriculum, interest, delivery};
-
-// The labels for the chart
-String[] labels = { "Sincerity",
-        "Kind",
-        "Curriculum",
-        "Interest",
-        "Delivery"};
-String[] Nolabels = { "",
-        "",
-        "",
-        "",
-        ""};
-// Create a PolarChart object of size 450 x 350 pixels
-PolarChart TotalScore = new PolarChart(450, 350);
-PolarChart TuteeScore = new PolarChart(200, 200);
-
-// Set center of plot area at (225, 185) with radius 150 pixels
-TotalScore.setPlotArea(225, 185, 150);
-TuteeScore.setPlotArea(100, 100, 70);
-
-// Add an area layer to the polar chart
-TotalScore.addAreaLayer(data, 0xffcc00);
-TuteeScore.addAreaLayer(data, 0xccffcc);
-
-// Set the labels to the angular axis as spokes
-TotalScore.angularAxis().setLabels(labels);
-TuteeScore.angularAxis().setLabels(Nolabels);
-
-// Output the chart
-String chart1URL = TotalScore.makeSession(request, "chart1");
-String chart1URL2 = TuteeScore.makeSession(request, "chart2");
-
-// Include tool tip for the chart
-String imageMap1 = TotalScore.getHTMLImageMap("", "", "title='{label}: score = {value}'");
-String imageMap2 = TuteeScore.getHTMLImageMap("", "", "title='{label}: score = {value}'");
-
-%>
 
 <!DOCTYPE html>
 <html>
@@ -182,29 +137,75 @@ String imageMap2 = TuteeScore.getHTMLImageMap("", "", "title='{label}: score = {
 		
 		<div id="contents">
 		<h1 style="text-indent: 50px; margin-top: 70px;">평점조회</h1>
-		<p style="text-indent: 50px; color: gray;">'자바를 자바바'의 점수는?</p>
+		<p style="text-indent: 50px; color: gray;">'<%= tutoring.get(0).getTutoringtitle() %>'의 점수는?</p>
 		<div style="text-align:center;">
+		
+		<%
+		Evaluation evaluation = new EvaluationDAO().getEvaluationTotal();
+		int TOTALsincerity=evaluation.getSincerity();
+		int TOTALkind=evaluation.getKindness();
+		int TOTALcurriculum=evaluation.getCurriculum();
+		int TOTALinterest=evaluation.getInterest();
+		int TOTALdelivery=evaluation.getDelivery();
+		
+		double[] data = {TOTALsincerity, TOTALkind, TOTALcurriculum, TOTALinterest, TOTALdelivery};
+
+		String[] labels = { "Sincerity", "Kind", "Curriculum", "Interest", "Delivery"};
+		String[] Nolabels = { "", "", "", "", ""};
+		PolarChart TotalScore = new PolarChart(450, 350);
+		TotalScore.setPlotArea(225, 185, 150);
+		TotalScore.addAreaLayer(data, 0xffcc00); // Add an area layer to the polar chart
+		TotalScore.angularAxis().setLabels(labels); // Set the labels to the angular axis as spokes
+		String chart1URL = TotalScore.makeSession(request, "chart1"); // Output the chart
+		String imageMap1 = TotalScore.getHTMLImageMap("", "", "title='{label}: score = {value}'"); // Include tool tip for the chart
+		%>
 		<img src='<%=response.encodeURL("getchart.jsp?"+chart1URL)%>' usemap="#map1" border="0">
 		<map name="map1"><%=imageMap1%></map>
 		</div>
 		<hr color="#dddddd" style="margin-left: 50px;">
 		<br>
 		<table style="margin-left: 50px; line-height:2;">
+			
+		<%
+		EvaluationDAO evaluationDAO = new EvaluationDAO();
+		ArrayList<Evaluation> list = evaluationDAO.getEvaluation();
+		int length = list.size();
+		double[][] dat = new double[length][5];
+		
+		for(int i=0; i<length; i++){
+			dat[i][0] = list.get(i).getSincerity();
+			dat[i][1] = list.get(i).getKindness();
+			dat[i][2] = list.get(i).getCurriculum();
+			dat[i][3] = list.get(i).getInterest();
+			dat[i][4] = list.get(i).getDelivery();
+			
+			String[] labels2 = { "Sincerity", "Kind", "Curriculum", "Interest", "Delivery"};
+			String[] Nolabels2 = { "", "", "", "", ""};
+			PolarChart TuteeScore[] = new PolarChart[length];
+			TuteeScore[i] = new PolarChart(200, 200);
+			TuteeScore[i].setPlotArea(100, 100, 70);
+			TuteeScore[i].addAreaLayer(dat[i], 0xccffcc);
+			TuteeScore[i].angularAxis().setLabels(Nolabels2);
+			String chart1URL2[] = new String[length];
+			chart1URL2[i] = TuteeScore[i].makeSession(request, "chart2");
+			String imageMap2[] = new String[length];
+			imageMap2[i] = TuteeScore[i].getHTMLImageMap("", "", "title='{label}: score = {value}'");
+		%>
 					<tr>
 						<td style="width:110px; text-align: center;"> <!-- 이름이 4글자인 사람을 위해 110으로 맞춤 -->
-							<p><img class='SidePhoto' src="images/1.png">정성옥</p>
+							<p><img class='SidePhoto' src="images/1.png">튜티이름</p>
 						</td>
 						<td style="width: 200px; text-align: center;">
-							<img src='<%=response.encodeURL("getchart.jsp?"+chart1URL2)%>' usemap="#map2" border="0">
-							<map name="map2"><%=imageMap2%></map>
+		 					<img src='<%=response.encodeURL("getchart.jsp?"+chart1URL2[i])%>' usemap="#map2" border="0">
+							<map name="map2"><%=imageMap2[i]%></map>
+		
 						</td>
-						<td style="stext-align: left; width: 400px;">
-							집중이 잘 되고 너무 재밌어서 지루하지 않은 수업이었습니다. 다음에 다른 튜터링으로 또 뵙고 싶어요.
-						</td>
-						<td style="text-align: right; width: 100px;">
-							2019-02-24
-						</td>
+						<td style="stext-align: left; width: 300px;"><%=list.get(i).getComent() %></td>
+						<td style="text-align: right; width: 100px;"><%=list.get(i).getEvaluation_date().substring(0,11) %></td>
 					</tr>
+			<%
+			}
+			%>
 			</table>
 			<br>
 			<hr color="#000080" style="margin-left: 50px;">

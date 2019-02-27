@@ -5,7 +5,11 @@
 <%@ page import="application.Application" %>
 <%@ page import="tclass.Tclass" %>
 <%@ page import="tclass.TclassDAO" %>
+<%@ page import="board.BoardDAO" %>
+<%@ page import="board.Board" %>
 <%@ page import="java.util.ArrayList" %>
+<%@page import="java.util.Date" %>
+<%@page import="java.text.SimpleDateFormat" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,6 +62,7 @@
 	</style>
 </head>
 <body>
+	
 	<%
 		String ID = null;
 		if (session.getAttribute("ID")!=null){
@@ -135,7 +140,32 @@
 		<div id="contents">
 		<h1 style="text-indent: 50px; margin-top: 70px;">과제게시판</h1>
 		<fieldset style="margin-left: 50px; margin-right: 20px; margin-top: 20px; color:red;">
-			<p>2019-02-25 02시 20분 22초 기준으로 진행중인 과제가 1개 있습니다.</p>
+			<%
+		
+			BoardDAO boardDAO = new BoardDAO();
+			ArrayList<Board> list = null;
+			list = boardDAO.getClassReport(pageNumber);
+			int count=0;
+			for(int i=0; i<list.size();i++){
+				count++;
+			}
+			%>
+			<p style="text-indent: 10px; color: gray;">총 <%=count%> 개의 과제</p>
+			<%
+				if(count==0){
+			%>
+				<fieldset style="margin-left: 50px; border: 1px solid black;">
+				<p style="text-align: center; height: 50px; margin-top: 50px; color: gray;">과제가 없습니다.</p>
+				</fieldset>
+			<%		
+				}else{
+			%>
+	
+			<p>	<% Date now = new Date();
+ 				SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 E요일 a hh:mm:ss"); 
+ 				String today = sf.format(now);
+				%>
+				<%= today %> 기준으로 진행중인 과제가 1개 있습니다.</p>
 			<p>[ GUI 계산기 만들어오기 ]</p>
 			<p>과제 제출기간이 5일 남았습니다.</p>
 		</fieldset>
@@ -156,27 +186,52 @@
 						<td>작성일자</td>
 						<td>조회수</td>
 					</tr>
+					<%
+					for(int i=0; i<list.size();i++){
+					%>
 					<tr>
-						<td style="text-align: center; width: 100px;">100</td>
-						<td style="width: 500px; text-indent: 10px;">GUI 계산기 만들어오기</td>
-						<td style="text-align: center; width: 100px;">2019-02-24</td>
-						<td style="text-align: center; width: 100px;">0</td>				
+						<td style="text-align: center; width: 100px;"><%= list.get(i).getBoardNumber() %></td>
+						<td style="width: 500px; text-indent: 10px;"><a href="ClassReportView.jsp?BoardNumber=<%= list.get(i).getBoardNumber() %>"><%=list.get(i).gettitle().replaceAll(" ", "&nbsp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>") %></a></td>
+						<td style="text-align: center; width: 100px;"><%= list.get(i).getDate().substring(0,11) %></td>
+						<td style="text-align: center; width: 100px;"><%= list.get(i).getViews() %></td>				
 					</tr>
+					<%
+					}
+					%>
 			</table>
+			<%
+			}
+			%>
 			<div style="text-align: center; margin-top: 50px; margin-left: 50px; margin-right: 50px;">
-				<input type="button" value="이전" style="background: white; border: 1px solid black;">
+				<%
+					if(pageNumber!=1){
+				%>
+						<a href="ClassBoard.jsp?pageNumber=<%=pageNumber-1 %>" style="background: white; border: 1px solid black;">이전</a>
+				<%		
+					}
+				%>
 				<a href="#">1</a>
 				<a href="#">2</a>
 				<a href="#">3</a>
 				<a href="#">4</a>
 				<a href="#">5</a>
-				<input type="button" value="다음" style="background: white; border: 1px solid black;">
+					
+			<%	
+				if(boardDAO.nextPage(pageNumber+1)){
+			%>
+				<a href="CLassBoard.jsp?pageNumber=<%=pageNumber+1 %>" style="background: white; border: 1px solid black;">다음</a>
+			<%
+				}
+			
+			%>
+			
+			
+			
+			
+			<p style="text-align: right;">
+			<a href="ClassReportAdd.jsp" style="background: white; border: 1px solid black;">과제추가</a>
+			</p>	
 			</div>
-			<form action="ClassReportAdd.jsp" method="post">
-			<p style="text-align: right; margin-right: 20px;">
-				<input type="submit" value="과제 추가" style="background: white; border: 1px solid black;">
-			</p>
-			</form>
 		</div>
 		</div>
 		<div id="footer">

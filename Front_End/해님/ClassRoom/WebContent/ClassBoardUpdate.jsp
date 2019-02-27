@@ -104,6 +104,10 @@ $(function(){
 <body>
 
 	<%
+		int code= 1;
+		if(request.getParameter("code")!=null){
+			code = Integer.parseInt(request.getParameter("code"));
+		}
 		String ID = null;
 		if (session.getAttribute("ID")!=null){
 			ID = (String) session.getAttribute("ID");
@@ -123,17 +127,26 @@ $(function(){
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('유효하지 않는 글입니다.')");
-			script.println("location.href = 'ClassBoard.jsp'");
 			script.println("</script>");
+			
+			%>
+			<script>
+			location.href = 'ClassBoard.jsp?code=<%=code%>';
+			</script>
+			<%
 		}
 		Board board = new BoardDAO().getBoard(BoardNumber);
 		if (!ID.equals(board.getID())){
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('권한이 없습니다.')");
-			script.println("location.href = 'ClassBoard.jsp'");
 			script.println("</script>");
-		}
+			%>
+			<script>
+			location.href = 'ClassBoard.jsp?code=<%=code%>';
+			</script>
+			<%
+			}
 	%>
 	
 	<nav class="navbar navbar-default">
@@ -193,7 +206,7 @@ $(function(){
 		<div id="contents">
 		<h1 style="text-indent: 50px; margin-top: 70px;">글 수정</h1>
 		<fieldset style="margin-left: 30px; border: 1px solid lightgray;">
-		<form name="frm" action="ClassBoardUpdateAction.jsp?BoardNumber=<%=BoardNumber %>" method="post">
+		<form name="frm" action="ClassBoardUpdateAction.jsp?code=<%=code%>&BoardNumber=<%=BoardNumber %>" method="post">
 			<table style="margin-top:30px; margin-left:30px;line-height:2; ">
 				<tr>
 					<td style="background: #efefef; width: 80px; text-align:center;">게시판</td>
@@ -228,8 +241,8 @@ $(function(){
 				</tr>
 			</table>
 			<p style="text-align: right; margin-right: 50px;">
-				<input type="submit" value="작성" id="save" style="background: white; border: 1px solid black;">
-				<input type="button" value="취소" style="background: white; border: 1px solid black;">
+				<input type="submit" value="수정" id="save" style="background: white; border: 1px solid black;">
+				<input type="button" value="취소"  onClick="history.go(-1)" style="background: white; border: 1px solid black;">
 			</p>
 			</form>
 		</fieldset>

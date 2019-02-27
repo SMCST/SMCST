@@ -159,69 +159,71 @@
 			</ul>
 			<br>
 			<hr style="border: dotted;">
+			<form action="ClassEvaluationAction.jsp" method="post">
 			<table style="margin-top:30px; margin-left: 50px;line-height:2; ">
 				<tr>
 					<td colspan="5">1. 튜터는 튜티들의 질문을 적절히 수용하였고 친절하게 응답하였습니까?</td>
 				</tr>
 				<tr>
-					<td style="width:150px;"><label><input type="radio" name="score" value="kind5">매우친절</label></td>
-					<td style="width:150px;"><label><input type="radio" name="score" value="kind4">친절</label></td>
-					<td style="width:150px;"><label><input type="radio" name="score" value="kind3">보통</label></td>
-					<td style="width:150px;"><label><input type="radio" name="score" value="kind2">불친절</label></td>
-					<td style="width:150px;"><label><input type="radio" name="score" value="kind1">매우불친절</label></td>
+					<td style="width:150px;"><label><input type="radio" name="kindness" value="5">매우친절</label></td>
+					<td style="width:150px;"><label><input type="radio" name="kindness" value="4">친절</label></td>
+					<td style="width:150px;"><label><input type="radio" name="kindness" value="3">보통</label></td>
+					<td style="width:150px;"><label><input type="radio" name="kindness" value="2">불친절</label></td>
+					<td style="width:150px;"><label><input type="radio" name="kindness" value="1">매우불친절</label></td>
 				</tr>
 				<tr>
 					<td colspan="5">2. 튜터는 수업준비를 충실히 하고 수업시간을 잘 준수하며 성실하게 튜터링하였습니까?</td>
 				</tr>
 				<tr>
-					<td><label><input type="radio" name="score" value="sincerity5">매우성실</label></td>
-					<td><label><input type="radio" name="score" value="sincerity4">성실</label></td>
-					<td><label><input type="radio" name="score" value="sincerity3">보통</label></td>
-					<td><label><input type="radio" name="score" value="sincerity2">불성실</label></td>
-					<td><label><input type="radio" name="score" value="sincerity1">매우불성실</label></td>
+					<td><label><input type="radio" name="sincerity" value="5">매우성실</label></td>
+					<td><label><input type="radio" name="sincerity" value="4">성실</label></td>
+					<td><label><input type="radio" name="sincerity" value="3">보통</label></td>
+					<td><label><input type="radio" name="sincerity" value="2">불성실</label></td>
+					<td><label><input type="radio" name="sincerity" value="1">매우불성실</label></td>
 				</tr>
 				<tr>
 					<td colspan="5">3. 이 튜터링의 커리큘럼에 만족하십니까?</td>
 				</tr>
 				<tr>
-					<td><label><input type="radio" name="score" value="curriculum5">매우만족</label></td>
-						<td><label><input type="radio" name="score" value="curriculum4">만족</label></td>
-					<td><label><input type="radio" name="score" value="curriculum3">보통</label></td>
-					<td><label><input type="radio" name="score" value="curriculum2">불만족</label></td>
-					<td><label><input type="radio" name="score" value="curriculum1">매우불만족</label></td>
+					<td><label><input type="radio" name="curriculum" value="5">매우만족</label></td>
+						<td><label><input type="radio" name="curriculum" value="4">만족</label></td>
+					<td><label><input type="radio" name="curriculum" value="3">보통</label></td>
+					<td><label><input type="radio" name="curriculum" value="2">불만족</label></td>
+					<td><label><input type="radio" name="curriculum" value="1">매우불만족</label></td>
 				</tr>
 				<tr>
 					<td colspan="5">4. 이 튜터링은 얼마나 재미있었습니까?</td>
 				</tr>
 				<tr>
-					<td><label><input type="radio" name="score" value="interest5">매우재미있음</label></td>
-					<td><label><input type="radio" name="score" value="interest4">재미있음</label></td>
-					<td><label><input type="radio" name="score" value="interest3">보통</label></td>
-					<td><label><input type="radio" name="score" value="interest2">재미없음</label></td>
-					<td><label><input type="radio" name="score" value="interest1">매우재미없음</label></td>
+					<td><label><input type="radio" name="interest" value="5">매우재미있음</label></td>
+					<td><label><input type="radio" name="interest" value="4">재미있음</label></td>
+					<td><label><input type="radio" name="interest" value="3">보통</label></td>
+					<td><label><input type="radio" name="interest" value="2">재미없음</label></td>
+					<td><label><input type="radio" name="interest" value="1">매우재미없음</label></td>
 				</tr>
 				<tr>
 					<td colspan="5">5. 수업내용은 이해하기 쉬웠으며 효과적으로 전달되었습니까?</td>
 				</tr>
 				<tr>
-					<td><label><input type="radio" name="score" value="delivery5">매우그렇다</label></td>
-					<td><label><input type="radio" name="score" value="delivery4">그렇다</label></td>
-					<td><label><input type="radio" name="score" value="delivery3">보통</label></td>
-					<td><label><input type="radio" name="score" value="delivery2">그렇지않다</label></td>
-					<td><label><input type="radio" name="score" value="delivery1">매우그렇지않다</label></td>
+					<td><label><input type="radio" name="delivery" value="5">매우그렇다</label></td>
+					<td><label><input type="radio" name="delivery" value="4">그렇다</label></td>
+					<td><label><input type="radio" name="delivery" value="3">보통</label></td>
+					<td><label><input type="radio" name="delivery" value="2">그렇지않다</label></td>
+					<td><label><input type="radio" name="delivery" value="1">매우그렇지않다</label></td>
 				</tr>
 				<tr>
 					<td colspan="5">6. 이 튜터링에 대한 건의사항이나 개선할 점이 있다면 자유롭게 의견을 제시해 주십시오.</td>
 				</tr>
 				<tr>
-					<td colspan="5"><textarea cols="100" rows="2" id="memo" placeholder="한줄 평을 간략히 써 주세요."></textarea></td>
+					<td colspan="5"><input type="text" name="coment" placeholder="한줄 평을 간략히 써 주세요." style="width:700px;"></text></td>
 				</tr>
 			</table>
 			
 			<p style="text-align: right;">
-				<input type="button" value="제출하기" style="background: white; border: 1px solid black;">
-				<input type="button" value="다시쓰기" style="background: white; border: 1px solid black;">
+				<input type="submit" value="제출하기" style="background: white; border: 1px solid black;">
+				<input type="button" value="취소"  onClick="history.go(-1)" style="background: white; border: 1px solid black;" >
 			</p>
+			</form>
 			</fieldset>
 		</div>
 		<div id="footer">

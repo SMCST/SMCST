@@ -180,6 +180,28 @@ public class BoardDAO {
 		}
 		return list;
 	}
+	public ArrayList<Board> getClassReport(int pageNumber){
+		String SQL = "SELECT BoardNumber,Title,ID, Date,views,code FROM BOARD WHERE code=2 and academicnumber=2 and BoardNumber < ? ORDER BY BoardNumber DESC LIMIT 10";
+		ArrayList<Board> list = new ArrayList<Board>();
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, getNext() - (pageNumber -1)*10); 
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Board board = new Board();
+				board.setBoardNumber(rs.getInt(1));
+				board.settitle(rs.getString(2));
+				board.setID(rs.getString(3));	
+				board.setDate(rs.getString(4));
+				board.setViews(rs.getInt(5));
+				board.setcode(rs.getInt(6));
+				list.add(board);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 	public int write(int Code, String title, String ID, String contents) {
 		String SQL = "INSERT INTO BOARD VALUES (?,null,?,?,?,?,?,0)";
 		try {

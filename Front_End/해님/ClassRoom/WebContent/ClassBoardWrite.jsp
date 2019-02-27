@@ -181,11 +181,11 @@ $(function(){
 				<tr>
 					<td style="background: #efefef; width: 80px; text-align:center;">게시판</td>
 					<td>
-					<input type="text" name="code" style="width: 670px;">
 						<select id="ClassBoardChoice" name="stringcode">
-							<option value="notify">공지사항</option>
-							<option value="meetinglog">회의록</option>
-							<option value="resourcecenter">자료실</option>
+							<option name="code" value="1">공지사항</option>
+							<option name="code" value="3">회의록</option>
+							<option name="code" value="10">자료실</option>
+							<option name="code" value="2">과제제출</option>
 						</select>
 					</td>
 				</tr>
@@ -212,7 +212,7 @@ $(function(){
 			</table>
 			<p style="text-align: right; margin-right: 50px;">
 				<input type="submit" value="작성" id="save" style="background: white; border: 1px solid black;">
-				<input type="button" value="취소" style="background: white; border: 1px solid black;">
+				<input type="button" value="취소"  onClick="history.go(-1)" style="background: white; border: 1px solid black;" >
 			</p>
 			</form>
 		</fieldset>

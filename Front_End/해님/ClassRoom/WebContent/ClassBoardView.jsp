@@ -7,6 +7,8 @@
 <%@ page import="application.Application" %>
 <%@ page import="tclass.Tclass" %>
 <%@ page import="tclass.TclassDAO" %>
+<%@ page import="boardreply.Boardreply" %>
+<%@ page import="boardreply.BoardreplyDAO" %>
 <%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
@@ -73,7 +75,7 @@
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('유효하지 않은 글입니다.')");
-			script.println("location.href='ClassNotify.jsp'");
+			script.println("location.href='ClassBoard.jsp?code='code");
 			script.println("</script>");
 		}
 		int code= 1;
@@ -169,6 +171,7 @@
 		<%
 		}
 		%>
+		
 			<table style="margin-left: 50px; line-height:2; border: 1px solid lightgray;">
 					<tr style="text-align: center;">
 						<td style="background: #EEEEEE; width: 100px;">글 제목</td>
@@ -193,41 +196,102 @@
 						<td colspan="5" style="min-height: 200px; text-align:left; text-indent: 20px;"><%=board.getcontents().replaceAll(" ", "&nbsp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>") %></td>
 					</tr>
 			</table>
-						
+			<fieldset style="margin-left: 50px; margin-top: 30px; border:1px solid lightgray;">
+			<%
+			BoardreplyDAO boardreplyDAO = new BoardreplyDAO();
+			ArrayList<Boardreply> replylist = null;
+			replylist = boardreplyDAO.getClassBoardReply(BoardNumber);
+			int Rcount=0;
+			for(int i=0; i<replylist.size();i++){
+				Rcount++;
+			}
+			if(Rcount==0){
+		%>
+		<fieldset style=" border:0px;">
+				<p style="text-align: center; height: 50px; margin-top: 50px; color: gray;">작성된 댓글이 없습니다.</p>
+			</fieldset>
+		<%		
+			}else{
+		%>
+			<table style=" line-height:2; border: 1px solid lightgray;">
+				<tr>
+					<td colspan="3" style="text-align: center; background: #EEEEEE;">댓글</td>
+				</tr>
+			<%
+			for(int i=0; i<replylist.size();i++){
+			%>
+				<tr>
+					<td style="text-align: center; width: 100px;">작성자</td>
+					<td style="border-bottom: 1px solid lightgray; width: 550px; text-indent: 20px;"><%=replylist.get(i).getBRContents() %></td>
+					<td style="text-align: center; border-bottom: 1px solid lightgray; width: 200px;"><%=replylist.get(i).getBRDate().substring(0, 11) %></td>	
+				</tr>
+			<%
+				}
+			}
+			%>	
+			</table>
+			<form action="ClassBoardReply.jsp" method="post">
+			
+			<table style="margin-top:10px;">
+				<tr>
+					<td colspan="2"><input type="text" name="brcontents" style="width: 800px; height: 150px;"></td>
+				</tr>
+			</table>		
+			<div style="text-align: center; margin-top: 10px; margin-left: 50px; margin-right: 50px;">
+				<p style="text-align: right;">
+					<input type="submit" value="댓글작성" id="save" style="background: white; border: 1px solid black;">
+				</p>
+			</div>
+			</form>
+			</fieldset>			
 			<div style="text-align: center; margin-top: 50px; margin-left: 50px; margin-right: 50px;">
 				<p style="text-align: right;">
 				
 					<%
 					if(code==1){ //공지사항 코드일 경우
+						if(ID != null && ID.equals(board.getID())){		
+					%>
+					<a href="ClassBoardUpdate.jsp?code=1&BoardNumber=<%=BoardNumber%>"  style="background: white; border: 1px solid black;">수정</a>
+					<a onclick="return confirm('정말로 삭제하시겠습니까?')" href="ClassBoarddeleteAction.jsp?code=1&BoardNumber=<%=BoardNumber%>"  style="background: white; border: 1px solid black;">삭제</a>
+					<%
+						}
 					%>
 					<a href="ClassBoard.jsp?code=1"  style="background: white; border: 1px solid black;">목록</a>
+				
 					<%	
 					}
 					%>
 					<%
 					if(code==3){ //회의록 코드일 경우
+						if(ID != null && ID.equals(board.getID())){
+							
+					%>
+					<a href="ClassBoardUpdate.jsp?code=3&BoardNumber=<%=BoardNumber%>"  style="background: white; border: 1px solid black;">수정</a>
+					<a onclick="return confirm('정말로 삭제하시겠습니까?')" href="ClassBoarddeleteAction.jsp?code=3&BoardNumber=<%=BoardNumber%>"  style="background: white; border: 1px solid black;">삭제</a>
+					<%
+						}
 					%>
 					<a href="ClassBoard.jsp?code=3"  style="background: white; border: 1px solid black;">목록</a>
+				
 					<%	
 					}
 					%>
 					<%
 					if(code==10){//자료실 코드일 경우
+						if(ID != null && ID.equals(board.getID())){
+							
+					%>
+					<a href="ClassBoardUpdate.jsp?code=10&BoardNumber=<%=BoardNumber%>"  style="background: white; border: 1px solid black;">수정</a>
+					<a onclick="return confirm('정말로 삭제하시겠습니까?')" href="ClassBoarddeleteAction.jsp?code=10&BoardNumber=<%=BoardNumber%>"  style="background: white; border: 1px solid black;">삭제</a>
+					<%
+						}
 					%>
 					<a href="ClassBoard.jsp?code=10"  style="background: white; border: 1px solid black;">목록</a>
 					<%	
 					}
 					%>
-					
-					<%
-						if(ID != null && ID.equals(board.getID())){
-					%>
-					<a href="ClassBoardUpdate.jsp?BoardNumber=<%=BoardNumber%>"  style="background: white; border: 1px solid black;">수정</a>
-					<a onclick="return confirm('정말로 삭제하시겠습니까?')" href="ClassBoarddeleteAction.jsp?BoardNumber=<%=BoardNumber%>"  style="background: white; border: 1px solid black;">삭제</a>
-					<%	
-					}
-					%>
 					<a href="ClassBoardWrite.jsp" style="background: white; border: 1px solid black;">글쓰기</a>
+				
 				</p>			
 			</div>
 		</div>
