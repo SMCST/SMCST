@@ -1,2 +1,3 @@
-# SMCST
-SangMyung Computer Science Tutoring System Capstone Project
+# SMCST(Group name)
+This is study place for HTML, JS, CSS
+
